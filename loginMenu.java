@@ -5,17 +5,22 @@
  */
 package pdcproject2;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Peter
  */
-public class Menu extends javax.swing.JFrame {
+public class loginMenu extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public loginMenu() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -34,14 +39,15 @@ public class Menu extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        title1 = new javax.swing.JLabel();
+        title2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        signInLabel = new javax.swing.JLabel();
+        staffCodeLabel = new javax.swing.JLabel();
+        passwordLabel = new javax.swing.JLabel();
         staffCodeLogin = new javax.swing.JTextField();
-        passwordLogin = new javax.swing.JTextField();
+        loginButton = new javax.swing.JButton();
+        passwordLogin = new javax.swing.JPasswordField();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -98,31 +104,32 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel3.setPreferredSize(new java.awt.Dimension(900, 830));
 
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Chan's");
+        title1.setBackground(new java.awt.Color(0, 0, 0));
+        title1.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
+        title1.setForeground(new java.awt.Color(255, 255, 255));
+        title1.setText("Chan's");
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Sylfaen", 2, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("GPU Management System");
+        title2.setBackground(new java.awt.Color(255, 255, 255));
+        title2.setFont(new java.awt.Font("Sylfaen", 2, 24)); // NOI18N
+        title2.setForeground(new java.awt.Color(255, 255, 255));
+        title2.setText("GPU Management System");
 
         jLabel5.setText("-------------------------------------------------------------------");
 
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Sylfaen", 3, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("LOGIN:");
+        signInLabel.setBackground(new java.awt.Color(255, 255, 255));
+        signInLabel.setFont(new java.awt.Font("Sylfaen", 3, 18)); // NOI18N
+        signInLabel.setForeground(new java.awt.Color(255, 255, 255));
+        signInLabel.setText("Sign In:");
 
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Staff Code:");
+        staffCodeLabel.setBackground(new java.awt.Color(255, 255, 255));
+        staffCodeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        staffCodeLabel.setText("Staff Code:");
 
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Password:");
+        passwordLabel.setBackground(new java.awt.Color(255, 255, 255));
+        passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
+        passwordLabel.setText("Password:");
 
         staffCodeLogin.setText("Type here...");
         staffCodeLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -131,12 +138,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        passwordLogin.setText("Type here...");
-        passwordLogin.addActionListener(new java.awt.event.ActionListener() {
+        loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordLoginActionPerformed(evt);
+                loginButtonActionPerformed(evt);
             }
         });
+
+        passwordLogin.setText("jPasswordField1");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -146,55 +155,60 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(405, 405, 405)
-                        .addComponent(jLabel4))
+                        .addComponent(title1))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(400, 400, 400)
-                        .addComponent(jLabel6))
+                        .addGap(403, 403, 403)
+                        .addComponent(loginButton))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(408, 408, 408)
+                        .addComponent(signInLabel))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(216, 216, 216)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
+                            .addComponent(staffCodeLabel)
+                            .addComponent(passwordLabel))
                         .addGap(39, 39, 39)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(staffCodeLogin)
-                                .addComponent(passwordLogin)))))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(passwordLogin, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(title2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(staffCodeLogin, javax.swing.GroupLayout.Alignment.LEADING)))))
                 .addContainerGap(253, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(102, 102, 102)
-                .addComponent(jLabel4)
+                .addComponent(title1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addGap(88, 88, 88)
-                .addComponent(jLabel6)
-                .addGap(39, 39, 39)
+                .addComponent(title2)
+                .addGap(76, 76, 76)
+                .addComponent(signInLabel)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(staffCodeLabel)
                     .addComponent(staffCodeLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(0, 375, Short.MAX_VALUE))
+                    .addComponent(passwordLabel)
+                    .addComponent(passwordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(81, 81, 81)
+                .addComponent(loginButton)
+                .addGap(0, 272, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel1);
@@ -203,12 +217,30 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void staffCodeLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffCodeLoginActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:       
     }//GEN-LAST:event_staffCodeLoginActionPerformed
 
-    private void passwordLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordLoginActionPerformed
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_passwordLoginActionPerformed
+        
+        String staffCode = staffCodeLogin.getText();
+        String password = passwordLogin.getText();
+        
+        if(staffCode.equals("123") && password.equals("pdc"))
+        {
+            staffCodeLogin.setText(null);
+            passwordLogin.setText(null);
+            //JOptionPane.showMessageDialog(null, "Login Successful!");
+            JFrame next = new inventoryMenu();
+            this.setVisible(false);
+            next.setVisible(true); 
+        }
+        else
+        {            
+            JOptionPane.showMessageDialog(null, "Staff code or Password is incorrect!");
+        }
+        
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,39 +259,47 @@ public class Menu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                new loginMenu().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JTextField passwordLogin;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JPasswordField passwordLogin;
+    private javax.swing.JLabel signInLabel;
+    private javax.swing.JLabel staffCodeLabel;
     private javax.swing.JTextField staffCodeLogin;
+    private javax.swing.JLabel title1;
+    private javax.swing.JLabel title2;
     // End of variables declaration//GEN-END:variables
 }
