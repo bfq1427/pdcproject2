@@ -5,6 +5,7 @@
  */
 package pdcproject2;
 
+import com.sun.glass.events.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -137,6 +138,11 @@ public class loginMenu extends javax.swing.JFrame {
                 staffCodeLoginActionPerformed(evt);
             }
         });
+        staffCodeLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                staffCodeLoginKeyPressed(evt);
+            }
+        });
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -144,8 +150,18 @@ public class loginMenu extends javax.swing.JFrame {
                 loginButtonActionPerformed(evt);
             }
         });
+        loginButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                loginButtonKeyPressed(evt);
+            }
+        });
 
         passwordLogin.setText("jPasswordField1");
+        passwordLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordLoginKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -217,14 +233,16 @@ public class loginMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void staffCodeLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffCodeLoginActionPerformed
-        // TODO add your handling code here:       
+        // TODO add your handling code here: 
     }//GEN-LAST:event_staffCodeLoginActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         
         String staffCode = staffCodeLogin.getText();
-        String password = passwordLogin.getText();
+        String password = passwordLogin.getText();       
+        
+        
         
         if(staffCode.equals("123") && password.equals("pdc"))
         {
@@ -241,6 +259,27 @@ public class loginMenu extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void loginButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginButtonKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_loginButtonKeyPressed
+
+    private void passwordLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordLoginKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            loginButtonActionPerformed(null);            
+        }      
+    }//GEN-LAST:event_passwordLoginKeyPressed
+
+    private void staffCodeLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_staffCodeLoginKeyPressed
+        // TODO add your handling code here:
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            loginButtonActionPerformed(null);            
+        }     
+    }//GEN-LAST:event_staffCodeLoginKeyPressed
 
     /**
      * @param args the command line arguments

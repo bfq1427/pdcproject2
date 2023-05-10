@@ -1,4 +1,4 @@
-package GPU_InventoryManager;
+package pdcproject2;
 /** *
  * @author Peter Chan
  * #20117970
