@@ -70,6 +70,6 @@ public class GPU extends abstractGPU implements Comparable<GPU> {
 
     public String toString()
     {
-        return this.name + "\n" + this.stock + "\n$" + this.price + "\nMemory: "+ memory + "GB\nClock Speed: "+ clockSpeed + "GHz\nNumber of Cores: " + numCores;
+        return "---------------------\n"+this.name + "\n" + this.stock + "\n$" + this.price + "\nMemory: "+ memory + "GB\nClock Speed: "+ clockSpeed + "GHz\nNumber of Cores: " + numCores + "\n---------------------";
     }      
 }

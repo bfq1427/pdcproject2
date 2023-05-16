@@ -156,7 +156,6 @@ public class loginMenu extends javax.swing.JFrame {
             }
         });
 
-        passwordLogin.setText("jPasswordField1");
         passwordLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passwordLoginKeyPressed(evt);
