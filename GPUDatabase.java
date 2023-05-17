@@ -182,7 +182,9 @@ public class GPUDatabase {
                 
                 GPU gpu = new GPU(name, stock, price, memory, clockSpeed, numCores);
                 
-                gpuList.add(gpu);                
+                gpuList.add(gpu);         
+                
+                System.out.println("Showing all NVIDIA 30 gpus in the database");
             }
         }catch(SQLException ex){
             Logger.getLogger(GPUDatabase.class.getName()).log(Level.SEVERE, null, ex);
@@ -207,7 +209,9 @@ public class GPUDatabase {
                 
                 GPU gpu = new GPU(name, stock, price, memory, clockSpeed, numCores);
                 
-                gpuList.add(gpu);                
+                gpuList.add(gpu);   
+                
+                System.out.println("Showing all NVIDIA 40 gpus in the database!");
             }
         }catch(SQLException ex){
             Logger.getLogger(GPUDatabase.class.getName()).log(Level.SEVERE, null, ex);
@@ -232,7 +236,9 @@ public class GPUDatabase {
                 
                 GPU gpu = new GPU(name, stock, price, memory, clockSpeed, numCores);
                 
-                gpuList.add(gpu);                
+                gpuList.add(gpu);   
+                
+                System.out.println("Showing all AMD 6000 gpus in the database!");
             }
         }catch(SQLException ex){
             Logger.getLogger(GPUDatabase.class.getName()).log(Level.SEVERE, null, ex);
@@ -281,10 +287,7 @@ public class GPUDatabase {
         {
             System.out.println(gpu);
         }
-        
-        
-        db.dbManager.closeConnection();
-        
-    }
-    
+
+        db.dbManager.closeConnection();        
+    }    
 }

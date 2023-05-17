@@ -1,5 +1,13 @@
 package pdcproject2;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Peter
@@ -12,6 +20,181 @@ public class inventoryMenu extends javax.swing.JFrame {
     public inventoryMenu() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Nvidia30dataBase();
+        Nvidia40dataBase();
+        Amd6000dataBase();
+        Amd7000dataBase();
+        
+    }
+    
+    public void Nvidia30dataBase(){
+        
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527//GPU_Database;","pdc","pdc");
+            
+            Statement st = conn.createStatement();
+            
+            String sql = "SELECT * FROM NVIDIA30SERIES";
+            
+            ResultSet rs = st.executeQuery(sql);
+            
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            
+           
+            model.setColumnCount(0);
+            model.addColumn("Name");
+            model.addColumn("Stock");
+            model.addColumn("Price $");
+            model.addColumn("Memory GBs");
+            model.addColumn("ClockSpeed GHz");
+            model.addColumn("NumCores");
+            model.setRowCount(0);
+            
+            
+            while(rs.next()){
+                
+                String name = rs.getString("Name");
+                String stock = String.valueOf(rs.getInt("Stock"));
+                String price = String.valueOf(rs.getDouble("Price"));
+                String memory = String.valueOf(rs.getInt("Memory"));
+                String clockSpeed = String.valueOf(rs.getDouble("ClockSpeed"));
+                String numCores = String.valueOf(rs.getInt("NumCores"));
+                
+                String tbData[] = {name, stock, price, memory, clockSpeed, numCores};
+
+                model.addRow(tbData);                
+            }
+            conn.close();            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void Nvidia40dataBase(){
+        
+         try{
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527//GPU_Database;","pdc","pdc");
+            
+            Statement st = conn.createStatement();
+            
+            String sql = "SELECT * FROM NVIDIA40SERIES";
+            
+            ResultSet rs = st.executeQuery(sql);
+            
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            
+           
+            model.setColumnCount(0);
+            model.addColumn("Name");
+            model.addColumn("Stock");
+            model.addColumn("Price $");
+            model.addColumn("Memory GBs");
+            model.addColumn("ClockSpeed GHz");
+            model.addColumn("NumCores");
+            model.setRowCount(0);
+            
+            
+            while(rs.next()){
+                
+                String name = rs.getString("Name");
+                String stock = String.valueOf(rs.getInt("Stock"));
+                String price = String.valueOf(rs.getDouble("Price"));
+                String memory = String.valueOf(rs.getInt("Memory"));
+                String clockSpeed = String.valueOf(rs.getDouble("ClockSpeed"));
+                String numCores = String.valueOf(rs.getInt("NumCores"));
+                
+                String tbData[] = {name, stock, price, memory, clockSpeed, numCores};
+
+                model.addRow(tbData);                
+            }
+            conn.close();            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+    
+    public void Amd6000dataBase(){    
+         try{
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527//GPU_Database;","pdc","pdc");
+            
+            Statement st = conn.createStatement();
+            
+            String sql = "SELECT * FROM AMD6000SERIES";
+            
+            ResultSet rs = st.executeQuery(sql);
+            
+            DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+            
+           
+            model.setColumnCount(0);
+            model.addColumn("Name");
+            model.addColumn("Stock");
+            model.addColumn("Price $");
+            model.addColumn("Memory GBs");
+            model.addColumn("ClockSpeed GHz");
+            model.addColumn("NumCores");
+            model.setRowCount(0);
+            
+            
+            while(rs.next()){
+                
+                String name = rs.getString("Name");
+                String stock = String.valueOf(rs.getInt("Stock"));
+                String price = String.valueOf(rs.getDouble("Price"));
+                String memory = String.valueOf(rs.getInt("Memory"));
+                String clockSpeed = String.valueOf(rs.getDouble("ClockSpeed"));
+                String numCores = String.valueOf(rs.getInt("NumCores"));
+                
+                String tbData[] = {name, stock, price, memory, clockSpeed, numCores};
+
+                model.addRow(tbData);                
+            }
+            conn.close();            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void Amd7000dataBase() {
+
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527//GPU_Database;", "pdc", "pdc");
+
+            Statement st = conn.createStatement();
+
+            String sql = "SELECT * FROM AMD7000SERIES";
+
+            ResultSet rs = st.executeQuery(sql);
+
+            DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+
+            model.setColumnCount(0);
+            model.addColumn("Name");
+            model.addColumn("Stock");
+            model.addColumn("Price $");
+            model.addColumn("Memory GBs");
+            model.addColumn("ClockSpeed GHz");
+            model.addColumn("NumCores");
+            model.setRowCount(0);
+
+            while (rs.next()) {
+
+                String name = rs.getString("Name");
+                String stock = String.valueOf(rs.getInt("Stock"));
+                String price = String.valueOf(rs.getDouble("Price"));
+                String memory = String.valueOf(rs.getInt("Memory"));
+                String clockSpeed = String.valueOf(rs.getDouble("ClockSpeed"));
+                String numCores = String.valueOf(rs.getInt("NumCores"));
+
+                String tbData[] = {name, stock, price, memory, clockSpeed, numCores};
+
+                model.addRow(tbData);
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -38,6 +221,27 @@ public class inventoryMenu extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        NVIDIA30button = new javax.swing.JButton();
+        NVIDIA40button = new javax.swing.JButton();
+        AMD6000button = new javax.swing.JButton();
+        AMD7000button = new javax.swing.JButton();
+        jTabbedPane7 = new javax.swing.JTabbedPane();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -179,21 +383,226 @@ public class inventoryMenu extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Stock");
 
+        NVIDIA30button.setText("NVIDIA 30 series");
+        NVIDIA30button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NVIDIA30buttonActionPerformed(evt);
+            }
+        });
+
+        NVIDIA40button.setText("NVIDIA 40 series");
+        NVIDIA40button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NVIDIA40buttonActionPerformed(evt);
+            }
+        });
+
+        AMD6000button.setText("AMD 6000 series");
+        AMD6000button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AMD6000buttonActionPerformed(evt);
+            }
+        });
+
+        AMD7000button.setText("AMD 7000 series");
+        AMD7000button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AMD7000buttonActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("NVIDIA 30 series stock ");
+
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Stock", "Price", "Memory", "ClockSpeed", "NumCores"
+            }
+        ));
+        jTable1.setRowHeight(40);
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(566, 566, 566)
+                .addComponent(jLabel10)
+                .addContainerGap(585, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane7.addTab("tab1", jPanel4);
+
+        jLabel11.setText("NVIDIA 40 series stock ");
+
+        jTable2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable2.setRowHeight(60);
+        jScrollPane2.setViewportView(jTable2);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(563, 563, 563)
+                .addComponent(jLabel11)
+                .addContainerGap(588, Short.MAX_VALUE))
+            .addComponent(jScrollPane2)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE))
+        );
+
+        jTabbedPane7.addTab("tab2", jPanel5);
+
+        jLabel12.setText("AMD 6000 series stock");
+
+        jTable3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable3.setRowHeight(40);
+        jScrollPane3.setViewportView(jTable3);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(571, 571, 571)
+                .addComponent(jLabel12)
+                .addContainerGap(582, Short.MAX_VALUE))
+            .addComponent(jScrollPane3)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+        );
+
+        jTabbedPane7.addTab("tab3", jPanel6);
+
+        jLabel13.setText("AMD 7000 series stock");
+
+        jTable4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable4.setRowHeight(60);
+        jScrollPane4.setViewportView(jTable4);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(566, 566, 566)
+                .addComponent(jLabel13)
+                .addContainerGap(587, Short.MAX_VALUE))
+            .addComponent(jScrollPane4)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
+        );
+
+        jTabbedPane7.addTab("tab4", jPanel7);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(600, 600, 600)
-                .addComponent(jLabel1)
-                .addContainerGap(609, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(600, 600, 600)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(287, 287, 287)
+                        .addComponent(NVIDIA30button)
+                        .addGap(61, 61, 61)
+                        .addComponent(NVIDIA40button)
+                        .addGap(94, 94, 94)
+                        .addComponent(AMD6000button)
+                        .addGap(48, 48, 48)
+                        .addComponent(AMD7000button)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jTabbedPane7)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(718, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NVIDIA30button)
+                    .addComponent(NVIDIA40button)
+                    .addComponent(AMD6000button)
+                    .addComponent(AMD7000button))
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 666, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("tab2", jPanel2);
@@ -244,6 +653,27 @@ public class inventoryMenu extends javax.swing.JFrame {
         jTabbedPane2.setSelectedIndex(2);
     }//GEN-LAST:event_addButtonActionPerformed
 
+    private void NVIDIA30buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NVIDIA30buttonActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane7.setSelectedIndex(0);
+        //dataBase();
+    }//GEN-LAST:event_NVIDIA30buttonActionPerformed
+
+    private void NVIDIA40buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NVIDIA40buttonActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane7.setSelectedIndex(1);
+    }//GEN-LAST:event_NVIDIA40buttonActionPerformed
+
+    private void AMD6000buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AMD6000buttonActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane7.setSelectedIndex(2);
+    }//GEN-LAST:event_AMD6000buttonActionPerformed
+
+    private void AMD7000buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AMD7000buttonActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane7.setSelectedIndex(3);
+    }//GEN-LAST:event_AMD7000buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -280,9 +710,17 @@ public class inventoryMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AMD6000button;
+    private javax.swing.JButton AMD7000button;
+    private javax.swing.JButton NVIDIA30button;
+    private javax.swing.JButton NVIDIA40button;
     private javax.swing.JButton addButton;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -294,7 +732,20 @@ public class inventoryMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane7;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JButton stockButton;
     // End of variables declaration//GEN-END:variables
