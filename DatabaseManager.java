@@ -18,7 +18,7 @@ public final class DatabaseManager {
     private static final String USER_NAME = "pdc";
     private static final String PASSWORD = "pdc";  
    
-    private static final String URL = "jdbc:derby://localhost:1527//GPU_Database;create=true";
+    private static final String URL = "jdbc:derby://localhost:1527/GPU_Database;create=true";
     
     Connection conn;
     

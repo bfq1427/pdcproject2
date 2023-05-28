@@ -15,5 +15,6 @@ public class GUI {
         frame.setLocation(900,300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.setTitle("Inventory System Manager");
     }
 }

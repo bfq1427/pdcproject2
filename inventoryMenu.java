@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,22 +26,23 @@ public class inventoryMenu extends javax.swing.JFrame {
         Amd6000dataBase();
         Amd7000dataBase();
         
+       
+        
     }
     
     public void Nvidia30dataBase(){
         
         try{
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527//GPU_Database;","pdc","pdc");
-            
-            Statement st = conn.createStatement();
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;","pdc","pdc");
             
             String sql = "SELECT * FROM NVIDIA30SERIES";
-            
+
+            Statement st = conn.createStatement();
+
             ResultSet rs = st.executeQuery(sql);
-            
+
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            
-           
+
             model.setColumnCount(0);
             model.addColumn("Name");
             model.addColumn("Stock");
@@ -60,9 +62,7 @@ public class inventoryMenu extends javax.swing.JFrame {
                 String clockSpeed = String.valueOf(rs.getDouble("ClockSpeed"));
                 String numCores = String.valueOf(rs.getInt("NumCores"));
                 
-                String tbData[] = {name, stock, price, memory, clockSpeed, numCores};
-
-                model.addRow(tbData);                
+                model.addRow(new Object[]{name, stock, price, memory, clockSpeed, numCores});
             }
             conn.close();            
         }catch(Exception e){
@@ -73,7 +73,7 @@ public class inventoryMenu extends javax.swing.JFrame {
     public void Nvidia40dataBase(){
         
          try{
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527//GPU_Database;","pdc","pdc");
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;","pdc","pdc");
             
             Statement st = conn.createStatement();
             
@@ -116,7 +116,7 @@ public class inventoryMenu extends javax.swing.JFrame {
     
     public void Amd6000dataBase(){    
          try{
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527//GPU_Database;","pdc","pdc");
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;","pdc","pdc");
             
             Statement st = conn.createStatement();
             
@@ -159,7 +159,7 @@ public class inventoryMenu extends javax.swing.JFrame {
     public void Amd7000dataBase() {
 
         try {
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527//GPU_Database;", "pdc", "pdc");
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
 
             Statement st = conn.createStatement();
 
@@ -194,6 +194,137 @@ public class inventoryMenu extends javax.swing.JFrame {
             conn.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    
+    public void nvidia30Add(String name, int stock, double price, int memory, double clockSpeed, int numCores) {
+
+        try {
+
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
+            
+            String query = "SELECT * FROM NVIDIA30SERIES WHERE Name = ?";
+            
+            PreparedStatement duplicateStatement = conn.prepareStatement(query);
+            
+            duplicateStatement.setString(1, name);
+            
+            ResultSet rs = duplicateStatement.executeQuery();
+            
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "GPU with the same name already exists. Duplicate entry not allowed.", "Duplicate Entry", JOptionPane.ERROR_MESSAGE);
+            } else {
+
+                String sql = "INSERT INTO NVIDIA30SERIES (Name, Stock, Price, Memory, ClockSpeed, NumCores) VALUES (?, ?, ?, ?, ?, ?)";
+
+                PreparedStatement st = conn.prepareStatement(sql);
+
+                st.setString(1, name);
+                st.setInt(2, stock);
+                st.setDouble(3, price);
+                st.setInt(4, memory);
+                st.setDouble(5, clockSpeed);
+                st.setInt(6, numCores);
+                st.executeUpdate();
+                JOptionPane.showMessageDialog(null, "GPU added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void nvidia30Remove(String name){
+        
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
+
+            String deleteQuery = "DELETE FROM NVIDIA30SERIES WHERE Name = ?";
+
+            PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);
+
+            deleteStatement.setString(1, name);
+
+            int rowsDelete = deleteStatement.executeUpdate();
+            
+            
+            if(rowsDelete > 0){
+                JOptionPane.showMessageDialog(null, "GPU removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                Nvidia30dataBase();
+            }else{
+                JOptionPane.showMessageDialog(null, "GPU not found", "Not found", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            conn.close();            
+            
+        }catch(Exception e){
+            System.out.println(JOptionPane.ERROR_MESSAGE);            
+        }
+    }
+    
+     public void nvidia40Add(String name, int stock, double price, int memory, double clockSpeed, int numCores) {
+
+        try {
+
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
+            
+            String query = "SELECT * FROM NVIDIA40SERIES WHERE Name = ?";
+            
+            PreparedStatement duplicateStatement = conn.prepareStatement(query);
+            
+            duplicateStatement.setString(1, name);
+            
+            ResultSet rs = duplicateStatement.executeQuery();
+            
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "GPU with the same name already exists. Duplicate entry not allowed.", "Duplicate Entry", JOptionPane.ERROR_MESSAGE);
+            } else {
+
+                String sql = "INSERT INTO NVIDIA40SERIES (Name, Stock, Price, Memory, ClockSpeed, NumCores) VALUES (?, ?, ?, ?, ?, ?)";
+
+                PreparedStatement st = conn.prepareStatement(sql);
+
+                st.setString(1, name);
+                st.setInt(2, stock);
+                st.setDouble(3, price);
+                st.setInt(4, memory);
+                st.setDouble(5, clockSpeed);
+                st.setInt(6, numCores);
+                st.executeUpdate();
+                JOptionPane.showMessageDialog(null, "GPU added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+            conn.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error adding gpu");
+        }
+    }
+     
+     public void nvidia40Remove(String name){
+        
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
+
+            String deleteQuery = "DELETE FROM NVIDIA40SERIES WHERE Name = ?";
+
+            PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);
+
+            deleteStatement.setString(1, name);
+
+            int rowsDelete = deleteStatement.executeUpdate();
+            
+            
+            if(rowsDelete > 0){
+                JOptionPane.showMessageDialog(null, "GPU removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                Nvidia30dataBase();
+            }else{
+                JOptionPane.showMessageDialog(null, "GPU not found", "Not found", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            conn.close();            
+            
+        }catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Error adding gpu");                      
         }
     }
 
@@ -244,6 +375,49 @@ public class inventoryMenu extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        nvidia30Name = new javax.swing.JLabel();
+        nvidia30Stock = new javax.swing.JLabel();
+        nvidia30Price = new javax.swing.JLabel();
+        nvidia30PMemory = new javax.swing.JLabel();
+        nvidia30ClockSpeed = new javax.swing.JLabel();
+        nvidia30NumCores = new javax.swing.JLabel();
+        name30TextField = new javax.swing.JTextField();
+        stock30TextField = new javax.swing.JTextField();
+        price30TextField = new javax.swing.JTextField();
+        memory30TextField = new javax.swing.JTextField();
+        clockSpeed30TextField = new javax.swing.JTextField();
+        numCores30TextField = new javax.swing.JTextField();
+        add30Button = new javax.swing.JButton();
+        remove30Button = new javax.swing.JButton();
+        update30Button = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        nvidia40Name = new javax.swing.JLabel();
+        nvidia40Stock = new javax.swing.JLabel();
+        nvidia40Price = new javax.swing.JLabel();
+        nvidia40Memory = new javax.swing.JLabel();
+        nvidia40clockSpeed = new javax.swing.JLabel();
+        nvidia40NumCores = new javax.swing.JLabel();
+        name40TextField = new javax.swing.JTextField();
+        stock40TextField = new javax.swing.JTextField();
+        price40TextField = new javax.swing.JTextField();
+        memory40TextField = new javax.swing.JTextField();
+        clockSpeed40TextField = new javax.swing.JTextField();
+        numCores40TextField = new javax.swing.JTextField();
+        add40Button = new javax.swing.JButton();
+        remove40Button = new javax.swing.JButton();
+        update40Button = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        nvidia30 = new javax.swing.JButton();
+        nvidia40 = new javax.swing.JButton();
+        amd6000 = new javax.swing.JButton();
+        amd7000 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -305,10 +479,10 @@ public class inventoryMenu extends javax.swing.JFrame {
                 .addComponent(stockButton)
                 .addGap(103, 103, 103)
                 .addComponent(addButton)
-                .addContainerGap(407, Short.MAX_VALUE))
+                .addContainerGap(420, Short.MAX_VALUE))
         );
 
-        getContentPane().add(leftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 787));
+        getContentPane().add(leftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 800));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -347,14 +521,15 @@ public class inventoryMenu extends javax.swing.JFrame {
                         .addGap(446, 446, 446)
                         .addComponent(jLabel6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84)
-                        .addComponent(jLabel8))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(474, 474, 474)
                         .addComponent(jLabel9)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(444, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(jLabel8)
+                .addGap(70, 70, 70))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,11 +542,11 @@ public class inventoryMenu extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel9)
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addGap(122, 122, 122)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab1", jPanel1);
@@ -411,9 +586,13 @@ public class inventoryMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("NVIDIA 30 series stock ");
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel10.setText("NVIDIA 30 series stock ");
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, -1));
+
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -432,25 +611,7 @@ public class inventoryMenu extends javax.swing.JFrame {
         jTable1.setRowHeight(40);
         jScrollPane1.setViewportView(jTable1);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(566, 566, 566)
-                .addComponent(jLabel10)
-                .addContainerGap(585, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel10)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1270, 490));
 
         jTabbedPane7.addTab("tab1", jPanel4);
 
@@ -487,7 +648,7 @@ public class inventoryMenu extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
         );
 
         jTabbedPane7.addTab("tab2", jPanel5);
@@ -525,7 +686,7 @@ public class inventoryMenu extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
         );
 
         jTabbedPane7.addTab("tab3", jPanel6);
@@ -563,7 +724,7 @@ public class inventoryMenu extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE))
         );
 
         jTabbedPane7.addTab("tab4", jPanel7);
@@ -574,35 +735,37 @@ public class inventoryMenu extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane7)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(600, 600, 600)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(287, 287, 287)
-                        .addComponent(NVIDIA30button)
-                        .addGap(61, 61, 61)
-                        .addComponent(NVIDIA40button)
-                        .addGap(94, 94, 94)
-                        .addComponent(AMD6000button)
-                        .addGap(48, 48, 48)
-                        .addComponent(AMD7000button)))
+                        .addGap(576, 576, 576)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(NVIDIA30button)
+                .addGap(144, 144, 144)
+                .addComponent(NVIDIA40button)
+                .addGap(230, 230, 230)
+                .addComponent(AMD6000button)
+                .addGap(132, 132, 132)
+                .addComponent(AMD7000button)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jTabbedPane7)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NVIDIA30button)
                     .addComponent(NVIDIA40button)
                     .addComponent(AMD6000button)
                     .addComponent(AMD7000button))
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 666, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(75, 75, 75)
+                .addComponent(jTabbedPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(206, 206, 206))
         );
 
         jTabbedPane2.addTab("tab2", jPanel2);
@@ -614,26 +777,340 @@ public class inventoryMenu extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Add / Remove");
 
+        jLabel14.setText("NVIDIA 30 series ");
+
+        nvidia30Name.setText("Name:");
+
+        nvidia30Stock.setText("Stock:");
+
+        nvidia30Price.setText("Price:");
+
+        nvidia30PMemory.setText("Memory:");
+
+        nvidia30ClockSpeed.setText("Clock Speed:");
+
+        nvidia30NumCores.setText("Number of Cores:");
+
+        add30Button.setText("Add");
+        add30Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add30ButtonActionPerformed(evt);
+            }
+        });
+
+        remove30Button.setText("Remove");
+        remove30Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remove30ButtonActionPerformed(evt);
+            }
+        });
+
+        update30Button.setText("Update");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(200, 423, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(nvidia30ClockSpeed)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(clockSpeed30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nvidia30Name)
+                            .addComponent(nvidia30Stock)
+                            .addComponent(nvidia30Price)
+                            .addComponent(nvidia30PMemory))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(memory30TextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(price30TextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(name30TextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(stock30TextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(nvidia30NumCores)
+                        .addGap(32, 32, 32)
+                        .addComponent(numCores30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(131, 131, 131)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(remove30Button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(add30Button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update30Button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(299, Short.MAX_VALUE))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(588, 588, 588)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel14)
+                .addGap(63, 63, 63)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(name30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nvidia30Name))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stock30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nvidia30Stock)
+                    .addComponent(add30Button))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nvidia30Price)
+                            .addComponent(price30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(remove30Button)))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nvidia30PMemory)
+                    .addComponent(memory30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nvidia30ClockSpeed)
+                            .addComponent(clockSpeed30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(update30Button)))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nvidia30NumCores)
+                    .addComponent(numCores30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(180, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab1", jPanel8);
+
+        jLabel15.setText("NVIDIA 40 Series");
+
+        nvidia40Name.setText("Name:");
+
+        nvidia40Stock.setText("Stock:");
+
+        nvidia40Price.setText("Price:");
+
+        nvidia40Memory.setText("Memory:");
+
+        nvidia40clockSpeed.setText("Clock Speed:");
+
+        nvidia40NumCores.setText("Number of Cores:");
+
+        stock40TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock40TextFieldActionPerformed(evt);
+            }
+        });
+
+        add40Button.setText("Add");
+        add40Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add40ButtonActionPerformed(evt);
+            }
+        });
+
+        remove40Button.setText("Remove");
+        remove40Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remove40ButtonActionPerformed(evt);
+            }
+        });
+
+        update40Button.setText("Update");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(365, 365, 365)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nvidia40Stock)
+                    .addComponent(nvidia40Name)
+                    .addComponent(nvidia40Price)
+                    .addComponent(nvidia40Memory)
+                    .addComponent(nvidia40clockSpeed)
+                    .addComponent(nvidia40NumCores))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(name40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clockSpeed40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(numCores40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(stock40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(price40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(memory40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(403, Short.MAX_VALUE)
+                .addComponent(add40Button)
+                .addGap(116, 116, 116)
+                .addComponent(remove40Button)
+                .addGap(89, 89, 89)
+                .addComponent(update40Button)
+                .addGap(454, 454, 454))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel15)
+                .addGap(45, 45, 45)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nvidia40Name)
+                    .addComponent(name40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nvidia40Stock)
+                    .addComponent(stock40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nvidia40Price)
+                    .addComponent(price40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nvidia40Memory)
+                    .addComponent(memory40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nvidia40clockSpeed)
+                    .addComponent(clockSpeed40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nvidia40NumCores)
+                    .addComponent(numCores40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(update40Button)
+                    .addComponent(add40Button)
+                    .addComponent(remove40Button))
+                .addContainerGap(94, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel9);
+
+        jLabel16.setText("AMD 6000 Series");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(606, 606, 606)
+                .addComponent(jLabel16)
+                .addContainerGap(586, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel16)
+                .addContainerGap(534, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab3", jPanel10);
+
+        jLabel17.setText("AMD 7000 Series");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap(601, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addGap(591, 591, 591))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel17)
+                .addContainerGap(531, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab4", jPanel11);
+
+        nvidia30.setText("NVIDIA 30 Series");
+        nvidia30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nvidia30ActionPerformed(evt);
+            }
+        });
+
+        nvidia40.setText("NVIDIA 40 Series");
+        nvidia40.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nvidia40ActionPerformed(evt);
+            }
+        });
+
+        amd6000.setText("AMD 6000 Series");
+        amd6000.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amd6000ActionPerformed(evt);
+            }
+        });
+
+        amd7000.setText("AMD 7000 Series");
+        amd7000.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amd7000ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(538, 538, 538)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addContainerGap(576, Short.MAX_VALUE))
+                .addGap(554, 554, 554))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addComponent(nvidia30)
+                .addGap(118, 118, 118)
+                .addComponent(nvidia40)
+                .addGap(166, 166, 166)
+                .addComponent(amd6000)
+                .addGap(110, 110, 110)
+                .addComponent(amd7000)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(54, 54, 54)
                 .addComponent(jLabel2)
-                .addContainerGap(718, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nvidia30)
+                    .addComponent(nvidia40)
+                    .addComponent(amd6000)
+                    .addComponent(amd7000))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane2.addTab("tab3", jPanel3);
 
-        getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 1270, 790));
+        getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, -40, 1270, 830));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -673,6 +1150,72 @@ public class inventoryMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         jTabbedPane7.setSelectedIndex(3);
     }//GEN-LAST:event_AMD7000buttonActionPerformed
+
+    private void nvidia30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nvidia30ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_nvidia30ActionPerformed
+
+    private void nvidia40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nvidia40ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_nvidia40ActionPerformed
+
+    private void amd6000ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd6000ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(2);
+    }//GEN-LAST:event_amd6000ActionPerformed
+
+    private void amd7000ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd7000ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(3);
+    }//GEN-LAST:event_amd7000ActionPerformed
+
+    private void remove30ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove30ButtonActionPerformed
+        // TODO add your handling code here:
+        String name = name30TextField.getText();
+        
+        nvidia30Remove(name);
+    }//GEN-LAST:event_remove30ButtonActionPerformed
+
+    private void add30ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add30ButtonActionPerformed
+        // TODO add your handling code here:
+        String name = name30TextField.getText();
+        int stock = Integer.parseInt(stock30TextField.getText());
+        double price = Double.parseDouble(price30TextField.getText());
+        int memory = Integer.parseInt(memory30TextField.getText());
+        double clockSpeed = Double.parseDouble(clockSpeed30TextField.getText());
+        int numCores = Integer.parseInt(numCores30TextField.getText());
+        
+        nvidia30Add(name, stock, price, memory, clockSpeed, numCores);      
+        
+        Nvidia30dataBase();
+    }//GEN-LAST:event_add30ButtonActionPerformed
+
+    private void stock40TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stock40TextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stock40TextFieldActionPerformed
+
+    private void add40ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add40ButtonActionPerformed
+        // TODO add your handling code here:
+         String name = name40TextField.getText();
+        int stock = Integer.parseInt(stock40TextField.getText());
+        double price = Double.parseDouble(price40TextField.getText());
+        int memory = Integer.parseInt(memory40TextField.getText());
+        double clockSpeed = Double.parseDouble(clockSpeed40TextField.getText());
+        int numCores = Integer.parseInt(numCores40TextField.getText());
+        
+        nvidia40Add(name, stock, price, memory, clockSpeed, numCores);      
+        
+        Nvidia40dataBase();
+    }//GEN-LAST:event_add40ButtonActionPerformed
+
+    private void remove40ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove40ButtonActionPerformed
+        // TODO add your handling code here:
+        String name = name40TextField.getText();
+        
+        nvidia40Remove(name);
+    }//GEN-LAST:event_remove40ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -714,13 +1257,23 @@ public class inventoryMenu extends javax.swing.JFrame {
     private javax.swing.JButton AMD7000button;
     private javax.swing.JButton NVIDIA30button;
     private javax.swing.JButton NVIDIA40button;
+    private javax.swing.JButton add30Button;
+    private javax.swing.JButton add40Button;
     private javax.swing.JButton addButton;
+    private javax.swing.JButton amd6000;
+    private javax.swing.JButton amd7000;
+    private javax.swing.JTextField clockSpeed30TextField;
+    private javax.swing.JTextField clockSpeed40TextField;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -730,16 +1283,21 @@ public class inventoryMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane7;
     private javax.swing.JTable jTable1;
@@ -747,6 +1305,34 @@ public class inventoryMenu extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JPanel leftPanel;
+    private javax.swing.JTextField memory30TextField;
+    private javax.swing.JTextField memory40TextField;
+    private javax.swing.JTextField name30TextField;
+    private javax.swing.JTextField name40TextField;
+    private javax.swing.JTextField numCores30TextField;
+    private javax.swing.JTextField numCores40TextField;
+    private javax.swing.JButton nvidia30;
+    private javax.swing.JLabel nvidia30ClockSpeed;
+    private javax.swing.JLabel nvidia30Name;
+    private javax.swing.JLabel nvidia30NumCores;
+    private javax.swing.JLabel nvidia30PMemory;
+    private javax.swing.JLabel nvidia30Price;
+    private javax.swing.JLabel nvidia30Stock;
+    private javax.swing.JButton nvidia40;
+    private javax.swing.JLabel nvidia40Memory;
+    private javax.swing.JLabel nvidia40Name;
+    private javax.swing.JLabel nvidia40NumCores;
+    private javax.swing.JLabel nvidia40Price;
+    private javax.swing.JLabel nvidia40Stock;
+    private javax.swing.JLabel nvidia40clockSpeed;
+    private javax.swing.JTextField price30TextField;
+    private javax.swing.JTextField price40TextField;
+    private javax.swing.JButton remove30Button;
+    private javax.swing.JButton remove40Button;
+    private javax.swing.JTextField stock30TextField;
+    private javax.swing.JTextField stock40TextField;
     private javax.swing.JButton stockButton;
+    private javax.swing.JButton update30Button;
+    private javax.swing.JButton update40Button;
     // End of variables declaration//GEN-END:variables
 }
