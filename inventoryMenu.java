@@ -263,20 +263,57 @@ public class inventoryMenu extends javax.swing.JFrame {
         }
     }
     
-     public void nvidia40Add(String name, int stock, double price, int memory, double clockSpeed, int numCores) {
+    public void nvidia30Update(String name, String fieldName, String fieldValue){
+        
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
+            
+            String query = "SELECT * FROM NVIDIA30SERIES WHERE Name = ?";
+            PreparedStatement duplicateStatement = conn.prepareStatement(query);
+            duplicateStatement.setString(1, name);
+            ResultSet rs = duplicateStatement.executeQuery();
+            
+            
+
+            if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "GPU Name not found", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String sql = "UPDATE NVIDIA30SERIES SET " +fieldName + " = ? WHERE Name = ?"; 
+                PreparedStatement st = conn.prepareStatement(fieldValue);
+                
+                if(fieldName.equals("Stock") || fieldName.equals("Memory") || fieldName.equals("NumCores")){
+                    int value = Integer.parseInt(fieldValue);
+                    st.setInt(1, value);
+                }else if(fieldName.equals("Price") || fieldName.equals("ClockSpeed")){
+                    double value = Double.parseDouble(fieldValue);
+                    st.setDouble(1, value);
+                }
+                st.setString(2, name);
+                st.executeUpdate();                
+                JOptionPane.showMessageDialog(null, "GPU updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+            conn.close();  
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "An Error Occurred");
+        }
+        
+    }
+
+    public void nvidia40Add(String name, int stock, double price, int memory, double clockSpeed, int numCores) {
 
         try {
 
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
-            
+
             String query = "SELECT * FROM NVIDIA40SERIES WHERE Name = ?";
-            
+
             PreparedStatement duplicateStatement = conn.prepareStatement(query);
-            
+
             duplicateStatement.setString(1, name);
-            
+
             ResultSet rs = duplicateStatement.executeQuery();
-            
+
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "GPU with the same name already exists. Duplicate entry not allowed.", "Duplicate Entry", JOptionPane.ERROR_MESSAGE);
             } else {
@@ -299,9 +336,9 @@ public class inventoryMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error adding gpu");
         }
     }
-     
-     public void nvidia40Remove(String name){
-        
+
+    public void nvidia40Remove(String name) {
+
         try {
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
 
@@ -312,21 +349,150 @@ public class inventoryMenu extends javax.swing.JFrame {
             deleteStatement.setString(1, name);
 
             int rowsDelete = deleteStatement.executeUpdate();
-            
-            
-            if(rowsDelete > 0){
+
+            if (rowsDelete > 0) {
                 JOptionPane.showMessageDialog(null, "GPU removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
                 Nvidia30dataBase();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "GPU not found", "Not found", JOptionPane.ERROR_MESSAGE);
             }
-            
-            conn.close();            
-            
-        }catch(Exception e){
-             JOptionPane.showMessageDialog(null, "Error adding gpu");                      
+
+            conn.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error adding gpu");
         }
     }
+
+    public void amd6000Add(String name, int stock, double price, int memory, double clockSpeed, int numCores) {
+
+        try {
+
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
+
+            String query = "SELECT * FROM AMD6000SERIES WHERE Name = ?";
+
+            PreparedStatement duplicateStatement = conn.prepareStatement(query);
+
+            duplicateStatement.setString(1, name);
+
+            ResultSet rs = duplicateStatement.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "GPU with the same name already exists. Duplicate entry not allowed.", "Duplicate Entry", JOptionPane.ERROR_MESSAGE);
+            } else {
+
+                String sql = "INSERT INTO AMD6000SERIES (Name, Stock, Price, Memory, ClockSpeed, NumCores) VALUES (?, ?, ?, ?, ?, ?)";
+
+                PreparedStatement st = conn.prepareStatement(sql);
+
+                st.setString(1, name);
+                st.setInt(2, stock);
+                st.setDouble(3, price);
+                st.setInt(4, memory);
+                st.setDouble(5, clockSpeed);
+                st.setInt(6, numCores);
+                st.executeUpdate();
+                JOptionPane.showMessageDialog(null, "GPU added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+            conn.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error adding gpu");
+        }
+    }
+
+    public void amd6000Remove(String name) {
+
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
+
+            String deleteQuery = "DELETE FROM AMD6000SERIES WHERE Name = ?";
+
+            PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);
+
+            deleteStatement.setString(1, name);
+
+            int rowsDelete = deleteStatement.executeUpdate();
+
+            if (rowsDelete > 0) {
+                JOptionPane.showMessageDialog(null, "GPU removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                Amd6000dataBase();
+            } else {
+                JOptionPane.showMessageDialog(null, "GPU not found", "Not found", JOptionPane.ERROR_MESSAGE);
+            }
+
+            conn.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error adding gpu");
+        }
+    }
+
+    public void amd7000Add(String name, int stock, double price, int memory, double clockSpeed, int numCores) {
+
+        try {
+
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
+
+            String query = "SELECT * FROM AMD7000SERIES WHERE Name = ?";
+
+            PreparedStatement duplicateStatement = conn.prepareStatement(query);
+
+            duplicateStatement.setString(1, name);
+
+            ResultSet rs = duplicateStatement.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "GPU with the same name already exists. Duplicate entry not allowed.", "Duplicate Entry", JOptionPane.ERROR_MESSAGE);
+            } else {
+
+                String sql = "INSERT INTO AMD7000SERIES (Name, Stock, Price, Memory, ClockSpeed, NumCores) VALUES (?, ?, ?, ?, ?, ?)";
+
+                PreparedStatement st = conn.prepareStatement(sql);
+
+                st.setString(1, name);
+                st.setInt(2, stock);
+                st.setDouble(3, price);
+                st.setInt(4, memory);
+                st.setDouble(5, clockSpeed);
+                st.setInt(6, numCores);
+                st.executeUpdate();
+                JOptionPane.showMessageDialog(null, "GPU added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+            conn.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error adding gpu");
+        }
+    }
+
+    public void amd7000Remove(String name) {
+
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
+
+            String deleteQuery = "DELETE FROM AMD7000SERIES WHERE Name = ?";
+
+            PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);
+
+            deleteStatement.setString(1, name);
+
+            int rowsDelete = deleteStatement.executeUpdate();
+
+            if (rowsDelete > 0) {
+                JOptionPane.showMessageDialog(null, "GPU removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                Amd7000dataBase();
+            } else {
+                JOptionPane.showMessageDialog(null, "GPU not found", "Not found", JOptionPane.ERROR_MESSAGE);
+            }
+
+            conn.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error adding gpu");
+        }
+    }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -412,8 +578,38 @@ public class inventoryMenu extends javax.swing.JFrame {
         update40Button = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
+        amd6000Name = new javax.swing.JLabel();
+        amd6000Stock = new javax.swing.JLabel();
+        amd6000Price = new javax.swing.JLabel();
+        amd6000Memory = new javax.swing.JLabel();
+        amd6000ClockSpeed = new javax.swing.JLabel();
+        amd6000NumCores = new javax.swing.JLabel();
+        amd6000NameTextField = new javax.swing.JTextField();
+        amd6000StockTextField = new javax.swing.JTextField();
+        amd6000PriceTextField = new javax.swing.JTextField();
+        amd6000MemoryTextField = new javax.swing.JTextField();
+        amd6000ClockSpeedTextField = new javax.swing.JTextField();
+        amd6000NumCoresTextField = new javax.swing.JTextField();
+        amd6000Add = new javax.swing.JButton();
+        amd6000Remove = new javax.swing.JButton();
+        amd6000Update = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
+        amd7000Name = new javax.swing.JLabel();
+        amd7000Stock = new javax.swing.JLabel();
+        amd7000Price = new javax.swing.JLabel();
+        amd7000Memory = new javax.swing.JLabel();
+        amd7000ClockSpeed = new javax.swing.JLabel();
+        amd7000NumCores = new javax.swing.JLabel();
+        amd7000NameTextField = new javax.swing.JTextField();
+        amd7000StockTextField = new javax.swing.JTextField();
+        amd7000PriceTextField = new javax.swing.JTextField();
+        amd7000MemoryTextField = new javax.swing.JTextField();
+        amd7000ClockSpeedTextField = new javax.swing.JTextField();
+        amd7000NumCoresTextField = new javax.swing.JTextField();
+        amd7000Add = new javax.swing.JButton();
+        amd7000Remove = new javax.swing.JButton();
+        amd7000Update = new javax.swing.JButton();
         nvidia30 = new javax.swing.JButton();
         nvidia40 = new javax.swing.JButton();
         amd6000 = new javax.swing.JButton();
@@ -806,43 +1002,56 @@ public class inventoryMenu extends javax.swing.JFrame {
         });
 
         update30Button.setText("Update");
+        update30Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update30ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(200, 423, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addComponent(nvidia30ClockSpeed)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(clockSpeed30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nvidia30Name)
-                            .addComponent(nvidia30Stock)
-                            .addComponent(nvidia30Price)
-                            .addComponent(nvidia30PMemory))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(memory30TextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(price30TextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(name30TextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stock30TextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addComponent(nvidia30NumCores)
-                        .addGap(32, 32, 32)
-                        .addComponent(numCores30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(131, 131, 131)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(remove30Button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(add30Button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(update30Button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(299, Short.MAX_VALUE))
-            .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(588, 588, 588)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(596, Short.MAX_VALUE))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel8Layout.createSequentialGroup()
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(nvidia30ClockSpeed)
+                                .addComponent(nvidia30NumCores))
+                            .addGap(34, 34, 34)
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(clockSpeed30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(numCores30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                                        .addComponent(nvidia30Name)
+                                        .addGap(93, 93, 93))
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addComponent(nvidia30Stock)
+                                        .addGap(96, 96, 96)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                                    .addComponent(nvidia30PMemory)
+                                    .addGap(80, 80, 80)))
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(memory30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(stock30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(name30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(price30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(add30Button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(remove30Button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(update30Button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nvidia30Price))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -857,35 +1066,29 @@ public class inventoryMenu extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(stock30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nvidia30Stock)
-                    .addComponent(add30Button))
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nvidia30Price)
-                            .addComponent(price30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(remove30Button)))
-                .addGap(13, 13, 13)
+                    .addComponent(nvidia30Stock))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nvidia30Price)
+                    .addComponent(price30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nvidia30PMemory)
                     .addComponent(memory30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nvidia30ClockSpeed)
-                            .addComponent(clockSpeed30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(update30Button)))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nvidia30ClockSpeed)
+                    .addComponent(clockSpeed30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nvidia30NumCores)
                     .addComponent(numCores30TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(remove30Button)
+                    .addComponent(update30Button)
+                    .addComponent(add30Button))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab1", jPanel8);
@@ -944,7 +1147,7 @@ public class inventoryMenu extends javax.swing.JFrame {
                         .addGap(134, 134, 134)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                        .addGap(74, 74, 74)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(name40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(clockSpeed40TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -996,33 +1199,164 @@ public class inventoryMenu extends javax.swing.JFrame {
                     .addComponent(update40Button)
                     .addComponent(add40Button)
                     .addComponent(remove40Button))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab2", jPanel9);
 
         jLabel16.setText("AMD 6000 Series");
 
+        amd6000Name.setText("Name:");
+
+        amd6000Stock.setText("Stock:");
+
+        amd6000Price.setText("Price:");
+
+        amd6000Memory.setText("Memory:");
+
+        amd6000ClockSpeed.setText("Clock Speed:");
+
+        amd6000NumCores.setText("Number of Cores:");
+
+        amd6000StockTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amd6000StockTextFieldActionPerformed(evt);
+            }
+        });
+
+        amd6000Add.setText("Add");
+        amd6000Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amd6000AddActionPerformed(evt);
+            }
+        });
+
+        amd6000Remove.setText("Remove");
+        amd6000Remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amd6000RemoveActionPerformed(evt);
+            }
+        });
+
+        amd6000Update.setText("Update");
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(606, 606, 606)
-                .addComponent(jLabel16)
-                .addContainerGap(586, Short.MAX_VALUE))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(403, 403, 403)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(amd6000Add)
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(amd6000Stock)
+                                .addComponent(amd6000Name)
+                                .addComponent(amd6000Memory)
+                                .addComponent(amd6000ClockSpeed)
+                                .addComponent(amd6000NumCores)
+                                .addComponent(amd6000Price)))
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addComponent(amd6000Remove)
+                                .addGap(95, 95, 95)
+                                .addComponent(amd6000Update))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(amd6000StockTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(amd6000NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(amd6000PriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(amd6000MemoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(amd6000ClockSpeedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(amd6000NumCoresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(587, 587, 587)
+                        .addComponent(jLabel16)))
+                .addContainerGap(447, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel16)
-                .addContainerGap(534, Short.MAX_VALUE))
+                .addGap(77, 77, 77)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd6000Name)
+                    .addComponent(amd6000NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(amd6000Stock)
+                    .addComponent(amd6000StockTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd6000Price)
+                    .addComponent(amd6000PriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd6000Memory)
+                    .addComponent(amd6000MemoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd6000ClockSpeed)
+                    .addComponent(amd6000ClockSpeedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd6000NumCores)
+                    .addComponent(amd6000NumCoresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd6000Add)
+                    .addComponent(amd6000Remove)
+                    .addComponent(amd6000Update))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab3", jPanel10);
 
         jLabel17.setText("AMD 7000 Series");
+
+        amd7000Name.setText("Name:");
+
+        amd7000Stock.setText("Stock:");
+
+        amd7000Price.setText("Price:");
+
+        amd7000Memory.setText("Memory:");
+
+        amd7000ClockSpeed.setText("Clock Speed:");
+
+        amd7000NumCores.setText("Number of Cores:");
+
+        amd7000ClockSpeedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amd7000ClockSpeedTextFieldActionPerformed(evt);
+            }
+        });
+
+        amd7000NumCoresTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amd7000NumCoresTextFieldActionPerformed(evt);
+            }
+        });
+
+        amd7000Add.setText("Add");
+        amd7000Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amd7000AddActionPerformed(evt);
+            }
+        });
+
+        amd7000Remove.setText("Remove");
+        amd7000Remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amd7000RemoveActionPerformed(evt);
+            }
+        });
+
+        amd7000Update.setText("Update");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -1032,13 +1366,68 @@ public class inventoryMenu extends javax.swing.JFrame {
                 .addContainerGap(601, Short.MAX_VALUE)
                 .addComponent(jLabel17)
                 .addGap(591, 591, 591))
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(410, 410, 410)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(amd7000Add)
+                        .addGap(110, 110, 110)
+                        .addComponent(amd7000Remove)
+                        .addGap(110, 110, 110)
+                        .addComponent(amd7000Update))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(amd7000Name)
+                            .addComponent(amd7000Stock)
+                            .addComponent(amd7000Price)
+                            .addComponent(amd7000Memory)
+                            .addComponent(amd7000ClockSpeed)
+                            .addComponent(amd7000NumCores))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(amd7000NameTextField)
+                            .addComponent(amd7000StockTextField)
+                            .addComponent(amd7000PriceTextField)
+                            .addComponent(amd7000MemoryTextField)
+                            .addComponent(amd7000ClockSpeedTextField)
+                            .addComponent(amd7000NumCoresTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel17)
-                .addContainerGap(531, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd7000Name)
+                    .addComponent(amd7000NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd7000Stock)
+                    .addComponent(amd7000StockTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd7000Price)
+                    .addComponent(amd7000PriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd7000Memory)
+                    .addComponent(amd7000MemoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd7000ClockSpeed)
+                    .addComponent(amd7000ClockSpeedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd7000NumCores)
+                    .addComponent(amd7000NumCoresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amd7000Add)
+                    .addComponent(amd7000Remove)
+                    .addComponent(amd7000Update))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab4", jPanel11);
@@ -1171,27 +1560,6 @@ public class inventoryMenu extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_amd7000ActionPerformed
 
-    private void remove30ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove30ButtonActionPerformed
-        // TODO add your handling code here:
-        String name = name30TextField.getText();
-        
-        nvidia30Remove(name);
-    }//GEN-LAST:event_remove30ButtonActionPerformed
-
-    private void add30ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add30ButtonActionPerformed
-        // TODO add your handling code here:
-        String name = name30TextField.getText();
-        int stock = Integer.parseInt(stock30TextField.getText());
-        double price = Double.parseDouble(price30TextField.getText());
-        int memory = Integer.parseInt(memory30TextField.getText());
-        double clockSpeed = Double.parseDouble(clockSpeed30TextField.getText());
-        int numCores = Integer.parseInt(numCores30TextField.getText());
-        
-        nvidia30Add(name, stock, price, memory, clockSpeed, numCores);      
-        
-        Nvidia30dataBase();
-    }//GEN-LAST:event_add30ButtonActionPerformed
-
     private void stock40TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stock40TextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_stock40TextFieldActionPerformed
@@ -1216,6 +1584,90 @@ public class inventoryMenu extends javax.swing.JFrame {
         
         nvidia40Remove(name);
     }//GEN-LAST:event_remove40ButtonActionPerformed
+
+    private void remove30ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove30ButtonActionPerformed
+        // TODO add your handling code here:
+        String name = name30TextField.getText();
+
+        nvidia30Remove(name);
+    }//GEN-LAST:event_remove30ButtonActionPerformed
+
+    private void add30ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add30ButtonActionPerformed
+        // TODO add your handling code here:
+        String name = name30TextField.getText();
+        int stock = Integer.parseInt(stock30TextField.getText());
+        double price = Double.parseDouble(price30TextField.getText());
+        int memory = Integer.parseInt(memory30TextField.getText());
+        double clockSpeed = Double.parseDouble(clockSpeed30TextField.getText());
+        int numCores = Integer.parseInt(numCores30TextField.getText());
+
+        nvidia30Add(name, stock, price, memory, clockSpeed, numCores);
+
+        Nvidia30dataBase();
+    }//GEN-LAST:event_add30ButtonActionPerformed
+
+    private void amd6000StockTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd6000StockTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_amd6000StockTextFieldActionPerformed
+
+    private void amd7000ClockSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd7000ClockSpeedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_amd7000ClockSpeedTextFieldActionPerformed
+
+    private void amd7000NumCoresTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd7000NumCoresTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_amd7000NumCoresTextFieldActionPerformed
+
+    private void amd6000AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd6000AddActionPerformed
+        // TODO add your handling code here:
+        String name = amd6000NameTextField.getText();
+        int stock = Integer.parseInt(amd6000StockTextField.getText());
+        double price = Double.parseDouble(amd6000PriceTextField.getText());
+        int memory = Integer.parseInt(amd6000MemoryTextField.getText());
+        double clockSpeed = Double.parseDouble(amd6000ClockSpeedTextField.getText());
+        int numCores = Integer.parseInt(amd6000NumCoresTextField.getText());
+
+        amd6000Add(name, stock, price, memory, clockSpeed, numCores);
+
+        Amd6000dataBase();
+    }//GEN-LAST:event_amd6000AddActionPerformed
+
+    private void amd6000RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd6000RemoveActionPerformed
+        // TODO add your handling code here:
+        String name = amd6000NameTextField.getText();        
+        amd6000Remove(name);
+    }//GEN-LAST:event_amd6000RemoveActionPerformed
+
+    private void amd7000AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd7000AddActionPerformed
+        // TODO add your handling code here:
+        String name = amd7000NameTextField.getText();
+        int stock = Integer.parseInt(amd7000StockTextField.getText());
+        double price = Double.parseDouble(amd7000PriceTextField.getText());
+        int memory = Integer.parseInt(amd7000MemoryTextField.getText());
+        double clockSpeed = Double.parseDouble(amd7000ClockSpeedTextField.getText());
+        int numCores = Integer.parseInt(amd7000NumCoresTextField.getText());
+
+        amd7000Add(name, stock, price, memory, clockSpeed, numCores);
+
+        Amd7000dataBase();
+    }//GEN-LAST:event_amd7000AddActionPerformed
+
+    private void amd7000RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd7000RemoveActionPerformed
+        // TODO add your handling code here:
+        String name = amd7000NameTextField.getText();        
+        amd7000Remove(name);
+    }//GEN-LAST:event_amd7000RemoveActionPerformed
+
+    private void update30ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update30ButtonActionPerformed
+        // TODO add your handling code here:
+        String name = name30TextField.getText();
+        String fieldName = fieldNameTextField.
+       
+        
+        nvidia30Update(name, fieldName, fieldValue);
+        
+        Nvidia30dataBase();
+    }//GEN-LAST:event_update30ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1261,7 +1713,37 @@ public class inventoryMenu extends javax.swing.JFrame {
     private javax.swing.JButton add40Button;
     private javax.swing.JButton addButton;
     private javax.swing.JButton amd6000;
+    private javax.swing.JButton amd6000Add;
+    private javax.swing.JLabel amd6000ClockSpeed;
+    private javax.swing.JTextField amd6000ClockSpeedTextField;
+    private javax.swing.JLabel amd6000Memory;
+    private javax.swing.JTextField amd6000MemoryTextField;
+    private javax.swing.JLabel amd6000Name;
+    private javax.swing.JTextField amd6000NameTextField;
+    private javax.swing.JLabel amd6000NumCores;
+    private javax.swing.JTextField amd6000NumCoresTextField;
+    private javax.swing.JLabel amd6000Price;
+    private javax.swing.JTextField amd6000PriceTextField;
+    private javax.swing.JButton amd6000Remove;
+    private javax.swing.JLabel amd6000Stock;
+    private javax.swing.JTextField amd6000StockTextField;
+    private javax.swing.JButton amd6000Update;
     private javax.swing.JButton amd7000;
+    private javax.swing.JButton amd7000Add;
+    private javax.swing.JLabel amd7000ClockSpeed;
+    private javax.swing.JTextField amd7000ClockSpeedTextField;
+    private javax.swing.JLabel amd7000Memory;
+    private javax.swing.JTextField amd7000MemoryTextField;
+    private javax.swing.JLabel amd7000Name;
+    private javax.swing.JTextField amd7000NameTextField;
+    private javax.swing.JLabel amd7000NumCores;
+    private javax.swing.JTextField amd7000NumCoresTextField;
+    private javax.swing.JLabel amd7000Price;
+    private javax.swing.JTextField amd7000PriceTextField;
+    private javax.swing.JButton amd7000Remove;
+    private javax.swing.JLabel amd7000Stock;
+    private javax.swing.JTextField amd7000StockTextField;
+    private javax.swing.JButton amd7000Update;
     private javax.swing.JTextField clockSpeed30TextField;
     private javax.swing.JTextField clockSpeed40TextField;
     private javax.swing.JButton homeButton;

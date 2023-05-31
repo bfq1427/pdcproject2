@@ -10,11 +10,10 @@ public class GUI {
     
     
     public static void main(String[] args) {
-        JFrame frame = new loginMenu();
-        frame.setTitle("Inventory System Manager");
-        frame.setLocation(900,300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setTitle("Inventory System Manager");
+        JFrame frame1 = new loginMenu();
+        frame1.setTitle("Inventory System Manager");
+        frame1.setLocation(900,300);
+        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame1.setVisible(true);        
     }
 }

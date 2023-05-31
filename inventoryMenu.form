@@ -763,46 +763,60 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="200" pref="423" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="nvidia30ClockSpeed" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="clockSpeed30TextField" min="-2" pref="200" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="nvidia30Name" min="-2" max="-2" attributes="0"/>
-                                          <Component id="nvidia30Stock" min="-2" max="-2" attributes="0"/>
-                                          <Component id="nvidia30Price" min="-2" max="-2" attributes="0"/>
-                                          <Component id="nvidia30PMemory" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="memory30TextField" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                                          <Component id="price30TextField" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                                          <Component id="name30TextField" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                                          <Component id="stock30TextField" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="nvidia30NumCores" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                      <Component id="numCores30TextField" min="-2" pref="200" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="remove30Button" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="add30Button" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="update30Button" min="-2" pref="100" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="299" max="32767" attributes="0"/>
-                          </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="588" max="-2" attributes="0"/>
                               <Component id="jLabel14" min="-2" pref="95" max="-2" attributes="0"/>
+                              <EmptySpace pref="596" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="nvidia30ClockSpeed" min="-2" max="-2" attributes="0"/>
+                                              <Component id="nvidia30NumCores" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="clockSpeed30TextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <Component id="numCores30TextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Component id="nvidia30Name" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="nvidia30Stock" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="nvidia30PMemory" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="memory30TextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <Component id="stock30TextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <Component id="name30TextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <Component id="price30TextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="add30Button" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                                      <Component id="remove30Button" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                                      <Component id="update30Button" min="-2" pref="100" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="nvidia30Price" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -821,45 +835,34 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="stock30TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="nvidia30Stock" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="add30Button" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="nvidia30Price" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="price30TextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                                      <Component id="remove30Button" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="nvidia30Price" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="price30TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="nvidia30PMemory" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="memory30TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="nvidia30ClockSpeed" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="clockSpeed30TextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                                      <Component id="update30Button" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="nvidia30ClockSpeed" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="clockSpeed30TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="nvidia30NumCores" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="numCores30TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="180" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="remove30Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="update30Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="add30Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="95" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -932,6 +935,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Update"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="update30ButtonActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -963,7 +969,7 @@
                                       <Component id="jLabel15" min="-2" pref="95" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="name40TextField" min="-2" pref="200" max="-2" attributes="0"/>
                                           <Component id="clockSpeed40TextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
@@ -1028,7 +1034,7 @@
                                   <Component id="add40Button" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="remove40Button" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="94" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1119,19 +1125,92 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="606" max="-2" attributes="0"/>
-                              <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="586" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="403" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="amd6000Add" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="amd6000Stock" min="-2" max="-2" attributes="0"/>
+                                              <Component id="amd6000Name" min="-2" max="-2" attributes="0"/>
+                                              <Component id="amd6000Memory" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="amd6000ClockSpeed" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="amd6000NumCores" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="amd6000Price" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                                              <Component id="amd6000Remove" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                                              <Component id="amd6000Update" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="amd6000StockTextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                                  <Component id="amd6000NameTextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                                  <Component id="amd6000PriceTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                                  <Component id="amd6000MemoryTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                                  <Component id="amd6000ClockSpeedTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                                  <Component id="amd6000NumCoresTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="587" max="-2" attributes="0"/>
+                                      <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace pref="447" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="534" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd6000Name" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd6000NameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="amd6000Stock" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd6000StockTextField" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd6000Price" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd6000PriceTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd6000Memory" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd6000MemoryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd6000ClockSpeed" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd6000ClockSpeedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd6000NumCores" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd6000NumCoresTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd6000Add" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd6000Remove" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd6000Update" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1140,6 +1219,72 @@
                     <Component class="javax.swing.JLabel" name="jLabel16">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="AMD 6000 Series"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd6000Name">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Name:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd6000Stock">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Stock:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd6000Price">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Price:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd6000Memory">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Memory:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd6000ClockSpeed">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Clock Speed:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd6000NumCores">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Number of Cores:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd6000NameTextField">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd6000StockTextField">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="amd6000StockTextFieldActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd6000PriceTextField">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd6000MemoryTextField">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd6000ClockSpeedTextField">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd6000NumCoresTextField">
+                    </Component>
+                    <Component class="javax.swing.JButton" name="amd6000Add">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Add"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="amd6000AddActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="amd6000Remove">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Remove"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="amd6000RemoveActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="amd6000Update">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Update"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1161,6 +1306,38 @@
                               <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="591" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="410" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="amd7000Add" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                                      <Component id="amd7000Remove" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                                      <Component id="amd7000Update" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="amd7000Name" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="amd7000Stock" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="amd7000Price" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="amd7000Memory" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="amd7000ClockSpeed" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="amd7000NumCores" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="amd7000NameTextField" max="32767" attributes="0"/>
+                                          <Component id="amd7000StockTextField" max="32767" attributes="0"/>
+                                          <Component id="amd7000PriceTextField" max="32767" attributes="0"/>
+                                          <Component id="amd7000MemoryTextField" max="32767" attributes="0"/>
+                                          <Component id="amd7000ClockSpeedTextField" max="32767" attributes="0"/>
+                                          <Component id="amd7000NumCoresTextField" pref="200" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -1168,7 +1345,43 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="531" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd7000Name" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd7000NameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd7000Stock" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd7000StockTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd7000Price" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd7000PriceTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd7000Memory" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd7000MemoryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd7000ClockSpeed" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd7000ClockSpeedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd7000NumCores" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd7000NumCoresTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amd7000Add" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd7000Remove" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amd7000Update" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="109" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1177,6 +1390,75 @@
                     <Component class="javax.swing.JLabel" name="jLabel17">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="AMD 7000 Series"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd7000Name">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Name:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd7000Stock">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Stock:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd7000Price">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Price:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd7000Memory">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Memory:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd7000ClockSpeed">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Clock Speed:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="amd7000NumCores">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Number of Cores:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd7000NameTextField">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd7000StockTextField">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd7000PriceTextField">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd7000MemoryTextField">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd7000ClockSpeedTextField">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="amd7000ClockSpeedTextFieldActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="amd7000NumCoresTextField">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="amd7000NumCoresTextFieldActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="amd7000Add">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Add"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="amd7000AddActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="amd7000Remove">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Remove"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="amd7000RemoveActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="amd7000Update">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Update"/>
                       </Properties>
                     </Component>
                   </SubComponents>

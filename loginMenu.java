@@ -249,6 +249,7 @@ public class loginMenu extends javax.swing.JFrame {
             passwordLogin.setText(null);
             //JOptionPane.showMessageDialog(null, "Login Successful!");
             JFrame next = new inventoryMenu();
+            next.setTitle("Inventory System Manager");
             this.setVisible(false);
             next.setVisible(true); 
         }
