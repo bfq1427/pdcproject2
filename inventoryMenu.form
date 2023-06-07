@@ -764,12 +764,7 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="588" max="-2" attributes="0"/>
-                              <Component id="jLabel14" min="-2" pref="95" max="-2" attributes="0"/>
-                              <EmptySpace pref="596" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="417" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
@@ -809,14 +804,18 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                       <Component id="add30Button" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
                                       <Component id="remove30Button" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                                      <Component id="update30Button" min="-2" pref="100" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="nvidia30Price" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace pref="498" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="588" max="-2" attributes="0"/>
+                              <Component id="jLabel14" min="-2" pref="112" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -859,7 +858,6 @@
                               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="remove30Button" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="update30Button" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="add30Button" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="95" max="32767" attributes="0"/>
@@ -931,14 +929,6 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="remove30ButtonActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="update30Button">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Update"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="update30ButtonActionPerformed"/>
-                      </Events>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel9">
@@ -980,16 +970,14 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="546" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="403" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="add40Button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
                               <Component id="remove40Button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                              <Component id="update40Button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="454" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="519" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1030,11 +1018,10 @@
                               </Group>
                               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="update40Button" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="add40Button" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="remove40Button" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="94" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1106,11 +1093,6 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="remove40ButtonActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="update40Button">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Update"/>
-                      </Properties>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel10">
@@ -1129,43 +1111,36 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="403" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="amd6000Add" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="amd6000Stock" min="-2" max="-2" attributes="0"/>
-                                              <Component id="amd6000Name" min="-2" max="-2" attributes="0"/>
-                                              <Component id="amd6000Memory" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="amd6000ClockSpeed" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="amd6000NumCores" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="amd6000Price" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                                              <Component id="amd6000Remove" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                                              <Component id="amd6000Update" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="amd6000StockTextField" min="-2" pref="200" max="-2" attributes="0"/>
-                                                  <Component id="amd6000NameTextField" min="-2" pref="200" max="-2" attributes="0"/>
-                                                  <Component id="amd6000PriceTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                                  <Component id="amd6000MemoryTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                                  <Component id="amd6000ClockSpeedTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                                  <Component id="amd6000NumCoresTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="amd6000Stock" min="-2" max="-2" attributes="0"/>
+                                          <Component id="amd6000Name" min="-2" max="-2" attributes="0"/>
+                                          <Component id="amd6000Memory" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="amd6000ClockSpeed" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="amd6000NumCores" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="amd6000Price" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="amd6000StockTextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                          <Component id="amd6000NameTextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                          <Component id="amd6000PriceTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                          <Component id="amd6000MemoryTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                          <Component id="amd6000ClockSpeedTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                          <Component id="amd6000NumCoresTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="587" max="-2" attributes="0"/>
                                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="475" max="-2" attributes="0"/>
+                                      <Component id="amd6000Add" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
+                                      <Component id="amd6000Remove" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace pref="447" max="32767" attributes="0"/>
+                              <EmptySpace pref="503" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1208,9 +1183,8 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="amd6000Add" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="amd6000Remove" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="amd6000Update" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="68" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1282,11 +1256,6 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="amd6000RemoveActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="amd6000Update">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Update"/>
-                      </Properties>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel11">
@@ -1310,11 +1279,10 @@
                               <EmptySpace min="-2" pref="410" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                                       <Component id="amd7000Add" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                                       <Component id="amd7000Remove" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-                                      <Component id="amd7000Update" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1336,7 +1304,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="500" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1379,7 +1347,6 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="amd7000Add" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="amd7000Remove" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="amd7000Update" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="109" max="32767" attributes="0"/>
                           </Group>
@@ -1455,11 +1422,6 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="amd7000RemoveActionPerformed"/>
                       </Events>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="amd7000Update">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Update"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>

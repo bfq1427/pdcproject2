@@ -6,9 +6,7 @@ package pdcproject2;
  */
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,8 +16,8 @@ import java.util.logging.Logger;
 
 public class GPUDatabase {
     
-    private DatabaseManager dbManager;
-    private Connection conn;
+    private final DatabaseManager dbManager;
+    private final Connection conn;
    
     public GPUDatabase() {
         dbManager = new DatabaseManager();
