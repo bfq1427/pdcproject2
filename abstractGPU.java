@@ -46,6 +46,7 @@ abstract class abstractGPU {
     
     public String toString()
     {
-        return this.name+"/n"+this.stock+"/n"+this.price;
+        return "Name: " + name + ", Stock: " + stock + ", Price: " + price;
+        //return this.name+"/n"+this.stock+"/n"+this.price;
     }   
 }

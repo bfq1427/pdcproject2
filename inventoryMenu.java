@@ -15,9 +15,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class inventoryMenu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form inventoryMenu
-     */
+
     public inventoryMenu() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -824,6 +822,7 @@ public class inventoryMenu extends javax.swing.JFrame {
 
         jTabbedPane7.addTab("tab1", jPanel4);
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel11.setText("NVIDIA 40 series stock ");
 
         jTable2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -845,23 +844,24 @@ public class inventoryMenu extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1270, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(563, 563, 563)
+                .addGap(480, 480, 480)
                 .addComponent(jLabel11)
-                .addContainerGap(588, Short.MAX_VALUE))
-            .addComponent(jScrollPane2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane7.addTab("tab2", jPanel5);
 
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setText("AMD 6000 series stock");
 
         jTable3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -883,23 +883,24 @@ public class inventoryMenu extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1270, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(571, 571, 571)
+                .addGap(490, 490, 490)
                 .addComponent(jLabel12)
-                .addContainerGap(582, Short.MAX_VALUE))
-            .addComponent(jScrollPane3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane7.addTab("tab3", jPanel6);
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel13.setText("AMD 7000 series stock");
 
         jTable4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -921,19 +922,19 @@ public class inventoryMenu extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1270, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(566, 566, 566)
+                .addGap(475, 475, 475)
                 .addComponent(jLabel13)
-                .addContainerGap(587, Short.MAX_VALUE))
-            .addComponent(jScrollPane4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane7.addTab("tab4", jPanel7);
@@ -1554,16 +1555,23 @@ public class inventoryMenu extends javax.swing.JFrame {
 
     private void add40ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add40ButtonActionPerformed
         // TODO add your handling code here:
-         String name = name40TextField.getText();
-        int stock = Integer.parseInt(stock40TextField.getText());
-        double price = Double.parseDouble(price40TextField.getText());
-        int memory = Integer.parseInt(memory40TextField.getText());
-        double clockSpeed = Double.parseDouble(clockSpeed40TextField.getText());
-        int numCores = Integer.parseInt(numCores40TextField.getText());
         
-        nvidia40Add(name, stock, price, memory, clockSpeed, numCores);      
-        
-        Nvidia40dataBase();
+        try {
+            String name = name40TextField.getText();
+            int stock = Integer.parseInt(stock40TextField.getText());
+            double price = Double.parseDouble(price40TextField.getText());
+            int memory = Integer.parseInt(memory40TextField.getText());
+            double clockSpeed = Double.parseDouble(clockSpeed40TextField.getText());
+            int numCores = Integer.parseInt(numCores40TextField.getText());
+
+            nvidia40Add(name, stock, price, memory, clockSpeed, numCores);
+
+            Nvidia40dataBase();
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error adding gpu, either fields are blank or gpu doesn't exist");
+        }
+
     }//GEN-LAST:event_add40ButtonActionPerformed
 
     private void remove40ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove40ButtonActionPerformed
@@ -1582,16 +1590,21 @@ public class inventoryMenu extends javax.swing.JFrame {
 
     private void add30ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add30ButtonActionPerformed
         // TODO add your handling code here:
-        String name = name30TextField.getText();
-        int stock = Integer.parseInt(stock30TextField.getText());
-        double price = Double.parseDouble(price30TextField.getText());
-        int memory = Integer.parseInt(memory30TextField.getText());
-        double clockSpeed = Double.parseDouble(clockSpeed30TextField.getText());
-        int numCores = Integer.parseInt(numCores30TextField.getText());
+        try {
+            String name = name30TextField.getText();
+            int stock = Integer.parseInt(stock30TextField.getText());
+            double price = Double.parseDouble(price30TextField.getText());
+            int memory = Integer.parseInt(memory30TextField.getText());
+            double clockSpeed = Double.parseDouble(clockSpeed30TextField.getText());
+            int numCores = Integer.parseInt(numCores30TextField.getText());
 
-        nvidia30Add(name, stock, price, memory, clockSpeed, numCores);
+            nvidia30Add(name, stock, price, memory, clockSpeed, numCores);
 
-        Nvidia30dataBase();
+            Nvidia30dataBase();
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Error adding gpu, either fields are blank or gpu doesn't exist");
+        }
+
     }//GEN-LAST:event_add30ButtonActionPerformed
 
     private void amd6000StockTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd6000StockTextFieldActionPerformed
@@ -1608,16 +1621,23 @@ public class inventoryMenu extends javax.swing.JFrame {
 
     private void amd6000AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd6000AddActionPerformed
         // TODO add your handling code here:
-        String name = amd6000NameTextField.getText();
-        int stock = Integer.parseInt(amd6000StockTextField.getText());
-        double price = Double.parseDouble(amd6000PriceTextField.getText());
-        int memory = Integer.parseInt(amd6000MemoryTextField.getText());
-        double clockSpeed = Double.parseDouble(amd6000ClockSpeedTextField.getText());
-        int numCores = Integer.parseInt(amd6000NumCoresTextField.getText());
 
-        amd6000Add(name, stock, price, memory, clockSpeed, numCores);
+        try {
+            String name = amd6000NameTextField.getText();
+            int stock = Integer.parseInt(amd6000StockTextField.getText());
+            double price = Double.parseDouble(amd6000PriceTextField.getText());
+            int memory = Integer.parseInt(amd6000MemoryTextField.getText());
+            double clockSpeed = Double.parseDouble(amd6000ClockSpeedTextField.getText());
+            int numCores = Integer.parseInt(amd6000NumCoresTextField.getText());
 
-        Amd6000dataBase();
+            amd6000Add(name, stock, price, memory, clockSpeed, numCores);
+
+            Amd6000dataBase();
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error adding gpu, either fields are blank or gpu doesn't exist");
+        }
+
     }//GEN-LAST:event_amd6000AddActionPerformed
 
     private void amd6000RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd6000RemoveActionPerformed
@@ -1628,16 +1648,23 @@ public class inventoryMenu extends javax.swing.JFrame {
 
     private void amd7000AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd7000AddActionPerformed
         // TODO add your handling code here:
-        String name = amd7000NameTextField.getText();
-        int stock = Integer.parseInt(amd7000StockTextField.getText());
-        double price = Double.parseDouble(amd7000PriceTextField.getText());
-        int memory = Integer.parseInt(amd7000MemoryTextField.getText());
-        double clockSpeed = Double.parseDouble(amd7000ClockSpeedTextField.getText());
-        int numCores = Integer.parseInt(amd7000NumCoresTextField.getText());
 
-        amd7000Add(name, stock, price, memory, clockSpeed, numCores);
+        try {
+            String name = amd7000NameTextField.getText();
+            int stock = Integer.parseInt(amd7000StockTextField.getText());
+            double price = Double.parseDouble(amd7000PriceTextField.getText());
+            int memory = Integer.parseInt(amd7000MemoryTextField.getText());
+            double clockSpeed = Double.parseDouble(amd7000ClockSpeedTextField.getText());
+            int numCores = Integer.parseInt(amd7000NumCoresTextField.getText());
 
-        Amd7000dataBase();
+            amd7000Add(name, stock, price, memory, clockSpeed, numCores);
+
+            Amd7000dataBase();
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error adding gpu, either fields are blank or gpu doesn't exist");
+        }
+
     }//GEN-LAST:event_amd7000AddActionPerformed
 
     private void amd7000RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd7000RemoveActionPerformed

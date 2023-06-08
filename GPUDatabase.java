@@ -271,7 +271,7 @@ public class GPUDatabase {
     }
     
     public static void main(String[] args) {
-        
+
         GPUDatabase db = new GPUDatabase();
         db.createNVIDIA30Table();
         db.createNVIDIA40Table();
@@ -285,6 +285,7 @@ public class GPUDatabase {
             System.out.println(gpu);
         }
 
-        db.dbManager.closeConnection();        
+        db.dbManager.closeConnection();     
+
     }    
 }
