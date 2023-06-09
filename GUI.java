@@ -2,12 +2,15 @@ package pdcproject2;
 
 import javax.swing.JFrame;
 
-/**
- *
- * @author Peter
+/** *
+ * @author Peter Chan
+ * #20117970
+ * COMP603/04a
+ * 09/06/2023
  */
-public class GUI {
-    
+
+//this class envokes the GUI and calls it to the user to interact with
+public class GUI {    
     
     public static void main(String[] args) {
         JFrame frame1 = new loginMenu();

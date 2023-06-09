@@ -150,15 +150,22 @@
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="passwordLogin" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="title2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="staffCodeLogin" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="passwordLogin" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="title2" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="staffCodeLogin" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="253" max="32767" attributes="0"/>
+                      <EmptySpace pref="174" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -177,11 +184,13 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="staffCodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="staffCodeLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="passwordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="passwordLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                       <Component id="loginButton" min="-2" max="-2" attributes="0"/>
@@ -282,6 +291,22 @@
               <Events>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passwordLoginKeyPressed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Staff Code = 123"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Password = pdc"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

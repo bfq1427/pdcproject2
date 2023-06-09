@@ -1,8 +1,10 @@
 package pdcproject2;
 
-/**
- *
- * @author Peter
+/** *
+ * @author Peter Chan
+ * #20117970
+ * COMP603/04a
+ * 09/06/2023
  */
 
 import java.sql.Connection;
@@ -10,9 +12,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
 
+
+//database manager class for handling the connection of the JDBC and functions
 public final class DatabaseManager {
     
     private static final String USER_NAME = "pdc";
@@ -38,6 +40,7 @@ public final class DatabaseManager {
         return this.conn;        
     }
     
+    //establish the connection with the server
     public void establishConnection() {
 
         if (conn == null) {
@@ -49,6 +52,7 @@ public final class DatabaseManager {
         }
     }
     
+    //close connection to the server 
     public void closeConnection(){
         if (conn != null) {
             try {
@@ -59,6 +63,7 @@ public final class DatabaseManager {
         }
     }
     
+    //handles update statements
     public void updateDB(String sql){
         
         Connection connection = this.conn;
@@ -72,6 +77,7 @@ public final class DatabaseManager {
         }
     }
     
+    //handles queries and resultsets
     public ResultSet myQuery(String sql) {
 
         Connection connection = this.conn;

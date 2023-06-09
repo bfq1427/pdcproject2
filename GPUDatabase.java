@@ -1,19 +1,20 @@
 package pdcproject2;
-
-/**
- *
- * @author Peter
+/** *
+ * @author Peter Chan
+ * #20117970
+ * COMP603/04a
+ * 09/06/2023
  */
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+//this class handles the creation of the SQL tables and insertion of values into said tables with columns and rows
 public class GPUDatabase {
     
     private final DatabaseManager dbManager;
@@ -24,6 +25,7 @@ public class GPUDatabase {
         conn = dbManager.getConnection();
     }
  
+    //creates the NVIDIA30 GPU SQL table
     public void createNVIDIA30Table() {
         try {
             Connection connection = dbManager.getConnection();
@@ -32,7 +34,7 @@ public class GPUDatabase {
 
             ResultSet tables = connection.getMetaData().getTables(null, null, newTableName.toUpperCase(), null);
             boolean tableExists = tables.next();
-
+            
             if (tableExists) {
                 String sqlDrop = "DROP TABLE " + newTableName;
                 statement.executeUpdate(sqlDrop);
@@ -60,7 +62,7 @@ public class GPUDatabase {
         }
     }
 
-    
+    //creates the NVIDIA 40 SQL table
     public void createNVIDIA40Table(){        
         try {
             Connection connection = dbManager.getConnection();
@@ -93,6 +95,7 @@ public class GPUDatabase {
 
     }
     
+    //creates the AMD6000 SQL table
     public void createAMD6000Table(){        
         try {
             Connection connection = dbManager.getConnection();
@@ -131,6 +134,7 @@ public class GPUDatabase {
 
     }
     
+    //creates the AMD7000 SQL table
     public void createAMD7000Table(){        
         try {
             Connection connection = dbManager.getConnection();
@@ -160,116 +164,8 @@ public class GPUDatabase {
             Logger.getLogger(GPUDatabase.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
-    
-    public ArrayList<GPU> getNVIDIA30GPUs(){
-        
-        ArrayList<GPU> gpuList = new ArrayList<>();
-        
-        ResultSet rs = dbManager.myQuery("SELECT * FROM NVIDIA30SERIES");
-        
-        try{
-            while(rs.next()){
-                String name = rs.getString("Name");
-                int stock = rs.getInt("Stock");
-                double price = rs.getDouble("Price");
-                int memory = rs.getInt("Memory");
-                double clockSpeed = rs.getDouble("ClockSpeed");
-                int numCores = rs.getInt("NumCores");
-                
-                GPU gpu = new GPU(name, stock, price, memory, clockSpeed, numCores);
-                
-                gpuList.add(gpu);         
-                
-                System.out.println("Showing all NVIDIA 30 gpus in the database");
-            }
-        }catch(SQLException ex){
-            Logger.getLogger(GPUDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return gpuList;        
-    }
-    
-    public ArrayList<GPU> getNVIDIA40GPUs(){
-        
-        ArrayList<GPU> gpuList = new ArrayList<>();
-        
-        ResultSet rs = dbManager.myQuery("SELECT * FROM NVIDIA40SERIES");
-        
-        try{
-            while(rs.next()){
-                String name = rs.getString("Name");
-                int stock = rs.getInt("Stock");
-                double price = rs.getDouble("Price");
-                int memory = rs.getInt("Memory");
-                double clockSpeed = rs.getDouble("ClockSpeed");
-                int numCores = rs.getInt("NumCores");
-                
-                GPU gpu = new GPU(name, stock, price, memory, clockSpeed, numCores);
-                
-                gpuList.add(gpu);   
-                
-                System.out.println("Showing all NVIDIA 40 gpus in the database!");
-            }
-        }catch(SQLException ex){
-            Logger.getLogger(GPUDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return gpuList;        
-    }
-    
-    public ArrayList<GPU> getAMD6000GPUs(){
-        
-        ArrayList<GPU> gpuList = new ArrayList<>();
-        
-        ResultSet rs = dbManager.myQuery("SELECT * FROM AMD6000SERIES");
-        
-        try{
-            while(rs.next()){
-                String name = rs.getString("Name");
-                int stock = rs.getInt("Stock");
-                double price = rs.getDouble("Price");
-                int memory = rs.getInt("Memory");
-                double clockSpeed = rs.getDouble("ClockSpeed");
-                int numCores = rs.getInt("NumCores");
-                
-                GPU gpu = new GPU(name, stock, price, memory, clockSpeed, numCores);
-                
-                gpuList.add(gpu);   
-                
-                System.out.println("Showing all AMD 6000 gpus in the database!");
-            }
-        }catch(SQLException ex){
-            Logger.getLogger(GPUDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return gpuList;        
-    }
-    
-    
-    public ArrayList<GPU> getAMD7000GPUs(){
-        
-        ArrayList<GPU> gpuList = new ArrayList<>();
-        
-        ResultSet rs = dbManager.myQuery("SELECT * FROM AMD7000SERIES");
-        
-        try{
-            while(rs.next()){
-                String name = rs.getString("Name");
-                int stock = rs.getInt("Stock");
-                double price = rs.getDouble("Price");
-                int memory = rs.getInt("Memory");
-                double clockSpeed = rs.getDouble("ClockSpeed");
-                int numCores = rs.getInt("NumCores");
-                
-                GPU gpu = new GPU(name, stock, price, memory, clockSpeed, numCores);
-                
-                gpuList.add(gpu);  
-                System.out.println("Showing all AMD 7000 gpus in the database!");
-            }
-        }catch(SQLException ex){
-            Logger.getLogger(GPUDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return gpuList;        
-    }
-    
+
+    //main to test if tables have been created
     public static void main(String[] args) {
 
         GPUDatabase db = new GPUDatabase();
@@ -277,13 +173,8 @@ public class GPUDatabase {
         db.createNVIDIA40Table();
         db.createAMD6000Table();
         db.createAMD7000Table();
-        
-        ArrayList<GPU> gpuList = db.getAMD7000GPUs();
-        
-        for(GPU gpu : gpuList)
-        {
-            System.out.println(gpu);
-        }
+
+        System.out.println("Added GPU's to the DataBase!");
 
         db.dbManager.closeConnection();     
 

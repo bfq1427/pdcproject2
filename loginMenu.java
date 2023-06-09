@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pdcproject2;
+
+/** *
+ * @author Peter Chan
+ * #20117970
+ * COMP603/04a
+ * 09/06/2023
+ */
 
 import com.sun.glass.events.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Peter
- */
+//class provides the Login Menu for the main GUI 
 public class loginMenu extends javax.swing.JFrame {
 
     /**
@@ -20,8 +19,7 @@ public class loginMenu extends javax.swing.JFrame {
      */
     public loginMenu() {
         initComponents();
-        this.setLocationRelativeTo(null);
-        
+        this.setLocationRelativeTo(null);        
     }
 
     /**
@@ -49,6 +47,8 @@ public class loginMenu extends javax.swing.JFrame {
         staffCodeLogin = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         passwordLogin = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -162,6 +162,12 @@ public class loginMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Staff Code = 123");
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Password = pdc");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -185,11 +191,16 @@ public class loginMenu extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(passwordLogin, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(title2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(staffCodeLogin, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addContainerGap(253, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(passwordLogin, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(title2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(staffCodeLogin, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(64, 64, 64)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))))))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,11 +216,13 @@ public class loginMenu extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(staffCodeLabel)
-                    .addComponent(staffCodeLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(staffCodeLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordLabel)
-                    .addComponent(passwordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(81, 81, 81)
                 .addComponent(loginButton)
                 .addGap(0, 272, Short.MAX_VALUE))
@@ -235,14 +248,13 @@ public class loginMenu extends javax.swing.JFrame {
         // TODO add your handling code here: 
     }//GEN-LAST:event_staffCodeLoginActionPerformed
 
+    //once login button is pressed based on if staffcode and password is correct, it will close and start the Inventory Menu
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         
         String staffCode = staffCodeLogin.getText();
-        String password = passwordLogin.getText();       
-        
-        
-        
+        String password = passwordLogin.getText();     
+
         if(staffCode.equals("123") && password.equals("pdc"))
         {
             staffCodeLogin.setText(null);
@@ -256,8 +268,7 @@ public class loginMenu extends javax.swing.JFrame {
         else
         {            
             JOptionPane.showMessageDialog(null, "Staff code or Password is incorrect!");
-        }
-        
+        }        
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void loginButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginButtonKeyPressed
@@ -265,6 +276,7 @@ public class loginMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_loginButtonKeyPressed
 
+    //can use ENTER key to press passwordlogin
     private void passwordLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordLoginKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
@@ -273,6 +285,7 @@ public class loginMenu extends javax.swing.JFrame {
         }      
     }//GEN-LAST:event_passwordLoginKeyPressed
 
+    //can use ENTER key for staffCode too
     private void staffCodeLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_staffCodeLoginKeyPressed
         // TODO add your handling code here:
          if(evt.getKeyCode() == KeyEvent.VK_ENTER)
@@ -325,6 +338,8 @@ public class loginMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

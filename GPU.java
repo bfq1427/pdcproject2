@@ -3,6 +3,7 @@ package pdcproject2;
  * @author Peter Chan
  * #20117970
  * COMP603/04a
+ * 09/06/2023
  */
 
 //GPU extends abstractGPU to super name, stock and price. And Comparable to implement comparable methods 
@@ -21,6 +22,8 @@ public class GPU extends abstractGPU implements Comparable<GPU> {
         this.clockSpeed = clockSpeed;
         this.numCores = numCores;
     }
+    
+   
     
     //compareTo method
     public int compareTo(GPU gpu)
@@ -70,6 +73,7 @@ public class GPU extends abstractGPU implements Comparable<GPU> {
 
     public String toString()
     {
-        return "---------------------\n"+this.name + "\n" + this.stock + "\n$" + this.price + "\nMemory: "+ memory + "GB\nClock Speed: "+ clockSpeed + "GHz\nNumber of Cores: " + numCores + "\n---------------------";
+        return "GPU: " + super.name + ", Memory: " + memory + "GB, Clock Speed: " + clockSpeed + " MHz, Cores: " + numCores;
+        //return "---------------------\n"+this.name + "\n" + this.stock + "\n$" + this.price + "\nMemory: "+ memory + "GB\nClock Speed: "+ clockSpeed + "GHz\nNumber of Cores: " + numCores + "\n---------------------";
     }      
 }

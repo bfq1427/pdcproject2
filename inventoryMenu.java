@@ -1,20 +1,22 @@
 package pdcproject2;
 
+/** *
+ * @author Peter Chan
+ * #20117970
+ * COMP603/04a
+ * 09/06/2023
+ */
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Peter
- */
-public class inventoryMenu extends javax.swing.JFrame {
 
+//this class handles the main Inventory Menu for the user to view, add or remove GPU's through this GUI
+public final class inventoryMenu extends javax.swing.JFrame {
 
     public inventoryMenu() {
         initComponents();
@@ -22,12 +24,10 @@ public class inventoryMenu extends javax.swing.JFrame {
         Nvidia30dataBase();
         Nvidia40dataBase();
         Amd6000dataBase();
-        Amd7000dataBase();
-        
-       
-        
+        Amd7000dataBase();       
     }
     
+    //gets connection to the specific NVIDIA 30 database and adds the values into a gui table 
     public void Nvidia30dataBase(){
         
         try{
@@ -68,6 +68,7 @@ public class inventoryMenu extends javax.swing.JFrame {
         }
     }
     
+    //gets connection to the specific NVIDIA 40 database and adds the values into a gui table 
     public void Nvidia40dataBase(){
         
          try{
@@ -105,13 +106,15 @@ public class inventoryMenu extends javax.swing.JFrame {
 
                 model.addRow(tbData);                
             }
-            conn.close();            
+            conn.close();  
+           
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
 
     }
     
+    //gets connection to the specific AMD6000 database and adds the values into a gui table 
     public void Amd6000dataBase(){    
          try{
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;","pdc","pdc");
@@ -154,6 +157,7 @@ public class inventoryMenu extends javax.swing.JFrame {
         }
     }
     
+     //gets connection to the specific AMD7000 database and adds the values into a gui table 
     public void Amd7000dataBase() {
 
         try {
@@ -194,320 +198,6 @@ public class inventoryMenu extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-
-    
-    public void nvidia30Add(String name, int stock, double price, int memory, double clockSpeed, int numCores) {
-
-        try {
-
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
-            
-            String query = "SELECT * FROM NVIDIA30SERIES WHERE Name = ?";
-            
-            PreparedStatement duplicateStatement = conn.prepareStatement(query);
-            
-            duplicateStatement.setString(1, name);
-            
-            ResultSet rs = duplicateStatement.executeQuery();
-            
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "GPU with the same name already exists. Duplicate entry not allowed.", "Duplicate Entry", JOptionPane.ERROR_MESSAGE);
-            } else {
-
-                String sql = "INSERT INTO NVIDIA30SERIES (Name, Stock, Price, Memory, ClockSpeed, NumCores) VALUES (?, ?, ?, ?, ?, ?)";
-
-                PreparedStatement st = conn.prepareStatement(sql);
-
-                st.setString(1, name);
-                st.setInt(2, stock);
-                st.setDouble(3, price);
-                st.setInt(4, memory);
-                st.setDouble(5, clockSpeed);
-                st.setInt(6, numCores);
-                st.executeUpdate();
-                JOptionPane.showMessageDialog(null, "GPU added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-            }
-            conn.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public void nvidia30Remove(String name){
-        
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
-
-            String deleteQuery = "DELETE FROM NVIDIA30SERIES WHERE Name = ?";
-
-            PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);
-
-            deleteStatement.setString(1, name);
-
-            int rowsDelete = deleteStatement.executeUpdate();
-            
-            
-            if(rowsDelete > 0){
-                JOptionPane.showMessageDialog(null, "GPU removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                Nvidia30dataBase();
-            }else{
-                JOptionPane.showMessageDialog(null, "GPU not found", "Not found", JOptionPane.ERROR_MESSAGE);
-            }
-            
-            conn.close();            
-            
-        }catch(Exception e){
-            System.out.println(JOptionPane.ERROR_MESSAGE);            
-        }
-    }
-    
-    public void nvidia30Update(String name, int stock, double price, int memory, double clockSpeed, int numCores) {
-
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
-
-            String query = "SELECT * FROM NVIDIA30SERIES WHERE Name = ?";
-            PreparedStatement duplicateStatement = conn.prepareStatement(query);
-            duplicateStatement.setString(1, name);
-            ResultSet rs = duplicateStatement.executeQuery();
-
-            if (!rs.next()) {
-                JOptionPane.showMessageDialog(null, "GPU Name not found", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                String sql = "UPDATE NVIDIA30SERIES SET Stock = Stock + ?, Price = ?, Memory = Memory + ?, ClockSpeed = ?, NumCores = NumCores + ? WHERE Name = ?";
-                PreparedStatement st = conn.prepareStatement(sql);
-
-                if (stock != 0) {
-                    st.setInt(1, stock);
-                } else {
-                    st.setInt(1, 0); // To keep the existing value
-                }
-                if (price != 0) {
-                    st.setDouble(2, price);
-                } else {
-                    st.setDouble(2, 0.0); // To keep the existing value
-                }
-                if (memory != 0) {
-                    st.setInt(3, memory);
-                } else {
-                    st.setInt(3, 0); // To keep the existing value
-                }
-                if (clockSpeed != 0.0) {
-                    st.setDouble(4, clockSpeed);
-                } else {
-                    st.setDouble(4, 0.0); // To keep the existing value
-                }
-                if (numCores != 0) {
-                    st.setInt(5, numCores);
-                } else {
-                    st.setInt(5, 0); // To keep the existing value
-                }
-
-                //st.setString(6, name);
-                st.executeUpdate();
-                JOptionPane.showMessageDialog(null, "GPU updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-            }
-            conn.close();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "An Error Occurred");
-        }
-
-    }
-
-    public void nvidia40Add(String name, int stock, double price, int memory, double clockSpeed, int numCores) {
-
-        try {
-
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
-
-            String query = "SELECT * FROM NVIDIA40SERIES WHERE Name = ?";
-
-            PreparedStatement duplicateStatement = conn.prepareStatement(query);
-
-            duplicateStatement.setString(1, name);
-
-            ResultSet rs = duplicateStatement.executeQuery();
-
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "GPU with the same name already exists. Duplicate entry not allowed.", "Duplicate Entry", JOptionPane.ERROR_MESSAGE);
-            } else {
-
-                String sql = "INSERT INTO NVIDIA40SERIES (Name, Stock, Price, Memory, ClockSpeed, NumCores) VALUES (?, ?, ?, ?, ?, ?)";
-
-                PreparedStatement st = conn.prepareStatement(sql);
-
-                st.setString(1, name);
-                st.setInt(2, stock);
-                st.setDouble(3, price);
-                st.setInt(4, memory);
-                st.setDouble(5, clockSpeed);
-                st.setInt(6, numCores);
-                st.executeUpdate();
-                JOptionPane.showMessageDialog(null, "GPU added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-            }
-            conn.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error adding gpu");
-        }
-    }
-
-    public void nvidia40Remove(String name) {
-
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
-
-            String deleteQuery = "DELETE FROM NVIDIA40SERIES WHERE Name = ?";
-
-            PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);
-
-            deleteStatement.setString(1, name);
-
-            int rowsDelete = deleteStatement.executeUpdate();
-
-            if (rowsDelete > 0) {
-                JOptionPane.showMessageDialog(null, "GPU removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                Nvidia30dataBase();
-            } else {
-                JOptionPane.showMessageDialog(null, "GPU not found", "Not found", JOptionPane.ERROR_MESSAGE);
-            }
-
-            conn.close();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error adding gpu");
-        }
-    }
-
-    public void amd6000Add(String name, int stock, double price, int memory, double clockSpeed, int numCores) {
-
-        try {
-
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
-
-            String query = "SELECT * FROM AMD6000SERIES WHERE Name = ?";
-
-            PreparedStatement duplicateStatement = conn.prepareStatement(query);
-
-            duplicateStatement.setString(1, name);
-
-            ResultSet rs = duplicateStatement.executeQuery();
-
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "GPU with the same name already exists. Duplicate entry not allowed.", "Duplicate Entry", JOptionPane.ERROR_MESSAGE);
-            } else {
-
-                String sql = "INSERT INTO AMD6000SERIES (Name, Stock, Price, Memory, ClockSpeed, NumCores) VALUES (?, ?, ?, ?, ?, ?)";
-
-                PreparedStatement st = conn.prepareStatement(sql);
-
-                st.setString(1, name);
-                st.setInt(2, stock);
-                st.setDouble(3, price);
-                st.setInt(4, memory);
-                st.setDouble(5, clockSpeed);
-                st.setInt(6, numCores);
-                st.executeUpdate();
-                JOptionPane.showMessageDialog(null, "GPU added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-            }
-            conn.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error adding gpu");
-        }
-    }
-
-    public void amd6000Remove(String name) {
-
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
-
-            String deleteQuery = "DELETE FROM AMD6000SERIES WHERE Name = ?";
-
-            PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);
-
-            deleteStatement.setString(1, name);
-
-            int rowsDelete = deleteStatement.executeUpdate();
-
-            if (rowsDelete > 0) {
-                JOptionPane.showMessageDialog(null, "GPU removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                Amd6000dataBase();
-            } else {
-                JOptionPane.showMessageDialog(null, "GPU not found", "Not found", JOptionPane.ERROR_MESSAGE);
-            }
-
-            conn.close();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error adding gpu");
-        }
-    }
-
-    public void amd7000Add(String name, int stock, double price, int memory, double clockSpeed, int numCores) {
-
-        try {
-
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
-
-            String query = "SELECT * FROM AMD7000SERIES WHERE Name = ?";
-
-            PreparedStatement duplicateStatement = conn.prepareStatement(query);
-
-            duplicateStatement.setString(1, name);
-
-            ResultSet rs = duplicateStatement.executeQuery();
-
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "GPU with the same name already exists. Duplicate entry not allowed.", "Duplicate Entry", JOptionPane.ERROR_MESSAGE);
-            } else {
-
-                String sql = "INSERT INTO AMD7000SERIES (Name, Stock, Price, Memory, ClockSpeed, NumCores) VALUES (?, ?, ?, ?, ?, ?)";
-
-                PreparedStatement st = conn.prepareStatement(sql);
-
-                st.setString(1, name);
-                st.setInt(2, stock);
-                st.setDouble(3, price);
-                st.setInt(4, memory);
-                st.setDouble(5, clockSpeed);
-                st.setInt(6, numCores);
-                st.executeUpdate();
-                JOptionPane.showMessageDialog(null, "GPU added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-            }
-            conn.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error adding gpu");
-        }
-    }
-
-    public void amd7000Remove(String name) {
-
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/GPU_Database;", "pdc", "pdc");
-
-            String deleteQuery = "DELETE FROM AMD7000SERIES WHERE Name = ?";
-
-            PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);
-
-            deleteStatement.setString(1, name);
-
-            int rowsDelete = deleteStatement.executeUpdate();
-
-            if (rowsDelete > 0) {
-                JOptionPane.showMessageDialog(null, "GPU removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                Amd7000dataBase();
-            } else {
-                JOptionPane.showMessageDialog(null, "GPU not found", "Not found", JOptionPane.ERROR_MESSAGE);
-            }
-
-            conn.close();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error adding gpu");
-        }
-    }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -680,13 +370,13 @@ public class inventoryMenu extends javax.swing.JFrame {
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(78, 78, 78)
                 .addComponent(homeButton)
-                .addGap(103, 103, 103)
+                .addGap(211, 211, 211)
                 .addComponent(stockButton)
-                .addGap(103, 103, 103)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addComponent(addButton)
-                .addContainerGap(420, Short.MAX_VALUE))
+                .addGap(158, 158, 158))
         );
 
         getContentPane().add(leftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 800));
@@ -717,10 +407,13 @@ public class inventoryMenu extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(84, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(jLabel8)
+                .addGap(70, 70, 70))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(460, 460, 460)
-                        .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(486, 486, 486)
                         .addComponent(jLabel5))
@@ -729,21 +422,18 @@ public class inventoryMenu extends javax.swing.JFrame {
                         .addComponent(jLabel6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(474, 474, 474)
-                        .addComponent(jLabel9)))
-                .addContainerGap(444, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(jLabel8)
-                .addGap(70, 70, 70))
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(458, 458, 458)
+                        .addComponent(jLabel3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(42, 42, 42)
                 .addComponent(jLabel3)
-                .addGap(79, 79, 79)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel5)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel6)
@@ -1493,6 +1183,8 @@ public class inventoryMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //button pressses change the users view to a different screen, which enables the user to envoke different actions to different GPU's
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
         jTabbedPane2.setSelectedIndex(0);
@@ -1553,6 +1245,8 @@ public class inventoryMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_stock40TextFieldActionPerformed
 
+    
+    //adds NVIDIA 40 gpu to the database based on the button press and shows it in the GUI instantly in which the user can see the change 
     private void add40ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add40ButtonActionPerformed
         // TODO add your handling code here:
         
@@ -1564,30 +1258,35 @@ public class inventoryMenu extends javax.swing.JFrame {
             double clockSpeed = Double.parseDouble(clockSpeed40TextField.getText());
             int numCores = Integer.parseInt(numCores40TextField.getText());
 
-            nvidia40Add(name, stock, price, memory, clockSpeed, numCores);
-
+            guiAdd nvidia40 = new guiAdd();            
+            nvidia40.nvidia40Add(name, stock, price, memory, clockSpeed, numCores);             
             Nvidia40dataBase();
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error adding gpu, either fields are blank or gpu doesn't exist");
+            JOptionPane.showMessageDialog(null, "Error adding gpu, either field(s) are blank or wrong values inputted");
         }
 
     }//GEN-LAST:event_add40ButtonActionPerformed
 
+    //envokes remove method which removes a GPU based on it's name
     private void remove40ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove40ButtonActionPerformed
         // TODO add your handling code here:
-        String name = name40TextField.getText();
-        
-        nvidia40Remove(name);
+        String name = name40TextField.getText();      
+        guiRemove remove40 = new guiRemove();      
+        remove40.nvidia40Remove(name);      
+        Nvidia40dataBase();
     }//GEN-LAST:event_remove40ButtonActionPerformed
 
+     //envokes remove method which removes a GPU based on it's name
     private void remove30ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove30ButtonActionPerformed
         // TODO add your handling code here:
-        String name = name30TextField.getText();
-
-        nvidia30Remove(name);
+        String name = name30TextField.getText();       
+        guiRemove remove30 = new guiRemove();       
+        remove30.nvidia30Remove(name);
+        Nvidia30dataBase();
     }//GEN-LAST:event_remove30ButtonActionPerformed
 
+    //adds NVIDIA 30 gpu to the database based on the button press and shows it in the GUI instantly in which the user can see the change 
     private void add30ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add30ButtonActionPerformed
         // TODO add your handling code here:
         try {
@@ -1598,11 +1297,12 @@ public class inventoryMenu extends javax.swing.JFrame {
             double clockSpeed = Double.parseDouble(clockSpeed30TextField.getText());
             int numCores = Integer.parseInt(numCores30TextField.getText());
 
-            nvidia30Add(name, stock, price, memory, clockSpeed, numCores);
-
+            guiAdd nvidia30 = new guiAdd();            
+            nvidia30.nvidia30Add(name, stock, price, memory, clockSpeed, numCores);
             Nvidia30dataBase();
+            
         }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Error adding gpu, either fields are blank or gpu doesn't exist");
+            JOptionPane.showMessageDialog(null, "Error adding gpu, either field(s) are blank or wrong values inputted");
         }
 
     }//GEN-LAST:event_add30ButtonActionPerformed
@@ -1619,6 +1319,7 @@ public class inventoryMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_amd7000NumCoresTextFieldActionPerformed
 
+    //adds AMD6000 gpu to the database based on the button press and shows it in the GUI instantly in which the user can see the change 
     private void amd6000AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd6000AddActionPerformed
         // TODO add your handling code here:
 
@@ -1629,26 +1330,29 @@ public class inventoryMenu extends javax.swing.JFrame {
             int memory = Integer.parseInt(amd6000MemoryTextField.getText());
             double clockSpeed = Double.parseDouble(amd6000ClockSpeedTextField.getText());
             int numCores = Integer.parseInt(amd6000NumCoresTextField.getText());
-
-            amd6000Add(name, stock, price, memory, clockSpeed, numCores);
-
+            
+            guiAdd amd6000 = new guiAdd();            
+            amd6000.amd6000Add(name, stock, price, memory, clockSpeed, numCores);
             Amd6000dataBase();
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error adding gpu, either fields are blank or gpu doesn't exist");
+            JOptionPane.showMessageDialog(null, "Error adding gpu, either field(s) are blank or wrong values inputted");
         }
 
     }//GEN-LAST:event_amd6000AddActionPerformed
 
+     //envokes remove method which removes a GPU based on it's name
     private void amd6000RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd6000RemoveActionPerformed
         // TODO add your handling code here:
-        String name = amd6000NameTextField.getText();        
-        amd6000Remove(name);
+        String name = amd6000NameTextField.getText();         
+        guiRemove remove6000 = new guiRemove();     
+        remove6000.amd6000Remove(name);            
+        Amd6000dataBase();
     }//GEN-LAST:event_amd6000RemoveActionPerformed
 
+    //adds AMD7000 gpu to the database based on the button press and shows it in the GUI instantly in which the user can see the change 
     private void amd7000AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd7000AddActionPerformed
         // TODO add your handling code here:
-
         try {
             String name = amd7000NameTextField.getText();
             int stock = Integer.parseInt(amd7000StockTextField.getText());
@@ -1657,20 +1361,24 @@ public class inventoryMenu extends javax.swing.JFrame {
             double clockSpeed = Double.parseDouble(amd7000ClockSpeedTextField.getText());
             int numCores = Integer.parseInt(amd7000NumCoresTextField.getText());
 
-            amd7000Add(name, stock, price, memory, clockSpeed, numCores);
-
+            guiAdd amd7000 = new guiAdd();
+            
+            amd7000.amd7000Add(name, stock, price, memory, clockSpeed, numCores);
+            
             Amd7000dataBase();
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error adding gpu, either fields are blank or gpu doesn't exist");
+            JOptionPane.showMessageDialog(null, "Error adding gpu, either field(s) are blank or wrong values inputted");
         }
-
     }//GEN-LAST:event_amd7000AddActionPerformed
 
+     //envokes remove method which removes a GPU based on it's name
     private void amd7000RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amd7000RemoveActionPerformed
         // TODO add your handling code here:
         String name = amd7000NameTextField.getText();        
-        amd7000Remove(name);
+        guiRemove remove7000 = new guiRemove();
+        remove7000.amd7000Remove(name);        
+        Amd7000dataBase();
     }//GEN-LAST:event_amd7000RemoveActionPerformed
 
     /**
